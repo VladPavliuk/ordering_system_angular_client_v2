@@ -1,0 +1,80 @@
+<mat-card>
+    <mat-card-title>
+      Available services to pin
+    </mat-card-title>
+    <mat-card-content>
+      <mat-table *ngIf="availableServices && availableServices.length > 0; else no_elements" #table [dataSource]="availableServices">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+          <mat-cell *matCellDef="let service"> {{service.id}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+          <mat-cell *matCellDef="let service"> {{service.title}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+          <mat-cell *matCellDef="let service">
+              $ {{service.price}} 
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="duration">
+            <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+            <mat-cell *matCellDef="let service">
+                $ {{service.duration}}  min.
+            </mat-cell>
+          </ng-container>
+    
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let service">
+            <button mat-button (click)="pinService(service.id)" mat-raised-button color="primary">Pin</button> 
+          </mat-cell>
+        </ng-container>  
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <ng-template #no_elements>
+        <h3>No available services to add</h3>
+    </ng-template>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" routerLink="/service-add">Create service</button>
+    </mat-card-actions>
+  </mat-card>
+
+<!-- <div class="row">
+  <table *ngIf="availableServices && availableServices.length > 0; else no_elements" class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of availableServices">
+          <th scope="row">{{ service.id }}</th>
+          <td>{{ service.title }}</td>
+          <td>
+            <button class="btn btn-success" (click)="pinService(service.id)">
+              Pin
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #no_elements>
+        <h1>No available services to add</h1>
+    </ng-template>
+</div>
+<div class="row">
+  <a class="btn btn-success" routerLink="/service-add">
+    Add service
+  </a>
+</div> -->

@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-card-title>
+    {{ organizations && organizations.length > 0 ? 'Order form' : 'To make order, first, add organization' }}
+  </mat-card-title>
+  <mat-card-content>
+    <mat-horizontal-stepper *ngIf="organizations && organizations.length > 0">
+      <mat-step label="Choose organization">
+        <app-order-organizations [organizations]="organizations" (onOrganizationSelected)="onOrganizationSelect($event)"></app-order-organizations>
+  
+        <div *ngIf="selectedOrganization">
+          <hr>
+          <button color="primary" mat-raised-button matStepperNext>Next step!</button>
+        </div> 
+        
+      </mat-step>
+      <mat-step label="Choose service">
+        <app-order-services [services]="services" (onServiceSelected)="onServiceSelect($event)"></app-order-services>
+        <hr>
+        <div *ngIf="customerService">
+            <mat-list role="list">
+              <mat-list-item role="listitem">
+                <h3>Selected service: <b>{{ customerService.title }}</b></h3>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  Price: <b> $ {{ customerService.price }}</b> 
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                Duration: <b> {{ customerService.duration }} min.</b>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                  <mat-form-field>
+                      <input (dateTimeChange)="setStartingDate($event)" 
+                              [owlDateTime]="dt" 
+                              [owlDateTimeTrigger]="dt" 
+                              matInput 
+                              placeholder="Set date of begining">
+                  </mat-form-field>
+                  
+                  <owl-date-time #dt></owl-date-time>
+              </mat-list-item>
+            </mat-list>
+   
+            <hr>
+            <button color="primary" mat-raised-button matStepperNext>Next step!</button>
+          </div> 
+      </mat-step>
+      <mat-step label="Set your contact info">
+          <h2>Set your info</h2>
+          <div class="customer-data-container">
+            <mat-form-field>
+              <input matInput (input)="onCutsomerFirstNameInput($event)" placeholder="Your first name">
+            </mat-form-field>
+          
+            <mat-form-field>
+              <input matInput (input)="onCutsomerLastNameInput($event)" placeholder="Your last name">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput (input)="onCustomerPhoneInput($event)" placeholder="Your phone number">
+            </mat-form-field>
+          </div>
+          <button (click)="makeOrder()" color="primary" mat-raised-button>Make an order!</button>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card-content>
+</mat-card>

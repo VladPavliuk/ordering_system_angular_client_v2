@@ -1,0 +1,8 @@
+.service-creation-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-creation-container > * {
+    width: 100%;
+}

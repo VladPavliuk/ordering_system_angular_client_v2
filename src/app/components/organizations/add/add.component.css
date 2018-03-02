@@ -1,0 +1,8 @@
+.organization-creation-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.organization-creation-container > * {
+    width: 100%;
+}

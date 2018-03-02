@@ -1,0 +1,37 @@
+<mat-card class="mat-elevation-z8">
+  <mat-card-title>
+    {{ services && services.length ? 'Services' : 'No services' }}
+  </mat-card-title>
+  <mat-card-content *ngIf="services && services.length">
+  <mat-table #table [dataSource]="services">
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let service"> {{service.title}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let service">$ {{service.price}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
+      <mat-cell *matCellDef="let service">{{service.duration}} min.</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let service">
+        <button mat-button  mat-raised-button color="primary" routerLink="/service/{{service.id}}">View</button> 
+      </mat-cell>
+    </ng-container>  
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+    
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent" class="create-service-button" routerLink="/service-add">Create service</button>
+  </mat-card-actions>
+</mat-card>

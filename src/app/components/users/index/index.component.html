@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-title>
+      {{ users && users.length > 0 ? 'Users' : 'No users' }}
+  </mat-card-title>
+  <mat-card-content *ngIf="users && users.length > 0">
+    <mat-table #table [dataSource]="users">
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef> First name </mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.firstName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef> Last name  </mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.lastName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.phone}}</mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  </mat-card-content>
+</mat-card>
+  

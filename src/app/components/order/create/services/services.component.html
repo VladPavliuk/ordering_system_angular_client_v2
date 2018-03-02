@@ -1,0 +1,12 @@
+<div *ngIf="services && services.length > 0">
+  <div class="service-form-container">
+    <mat-form-field>
+      <mat-select (selectionChange)="onServiceSelect($event)" placeholder="Choose service">
+        <mat-option *ngFor="let service of services" [value]="service.service_ID.id">
+          {{ service.service_ID.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+  

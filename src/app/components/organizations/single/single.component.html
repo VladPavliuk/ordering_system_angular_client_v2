@@ -1,0 +1,50 @@
+<mat-card *ngIf="organization">
+  <mat-card-title>
+    Organization: <b>{{ organization.title }}</b>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-table *ngIf="services && services.length > 0" #table [dataSource]="services">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+          <mat-cell *matCellDef="let service"> {{service.service_ID.id}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+          <mat-cell *matCellDef="let service"> {{service.service_ID.title}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+            <mat-cell *matCellDef="let service">$ {{service.service_ID.price}} </mat-cell>
+          </ng-container>
+
+        <ng-container matColumnDef="duration">
+          <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
+          <mat-cell *matCellDef="let service"> {{service.service_ID.duration}} min.</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let service">
+            <button mat-button  mat-raised-button color="primary" routerLink="/service/{{service.service_ID.id}}">View</button> 
+            <button mat-button  mat-raised-button color="warn" (click)="unpinService(service.service_ID.id)">Unpin</button> 
+          </mat-cell>
+        </ng-container>  
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent"  
+            routerLink="/organization/{{organization.id}}/available-services">
+      Pin service
+    </button>
+
+    <button mat-raised-button color="warn" 
+            (click)="delete()">
+      Delete organization
+    </button>
+  </mat-card-actions>
+</mat-card>

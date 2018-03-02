@@ -1,0 +1,15 @@
+<div *ngIf="service" class="mt-2">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Service: <b>{{ service.title }}</b></h5>
+      <div class="card-text">
+          Price: <b>$ {{ service.price }}</b>
+          <br>
+          Duration: <b>{{ service.duration }} min.</b>
+      </div>
+      <hr>
+      <button class="btn btn-danger" 
+              (click)="delete()">Delete</button>
+    </div>
+  </div>
+</div>

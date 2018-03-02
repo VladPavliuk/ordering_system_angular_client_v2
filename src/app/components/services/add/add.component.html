@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-title>Service creation form</mat-card-title>
+    <mat-card-content>
+        <div class="service-creation-container">
+            <mat-form-field>
+                <input matInput (input)="onTitleInput($event)" placeholder="Service title">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput (input)="onDurationInput($event)" placeholder="Service duration (min.)">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput (input)="onPriceInput($event)" placeholder="Service price ($)">
+            </mat-form-field>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="create()" color="primary" mat-raised-button>Add service</button>
+    </mat-card-actions>
+</mat-card>

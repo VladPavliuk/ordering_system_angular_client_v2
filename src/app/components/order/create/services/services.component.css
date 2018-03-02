@@ -1,0 +1,8 @@
+.service-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-form-container > * {
+    width: 100%;
+}

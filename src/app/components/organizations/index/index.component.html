@@ -1,0 +1,27 @@
+<mat-card class="mat-elevation-z8">
+  <mat-card-title>
+    {{ organizations && organizations.length ? 'Organizations' : 'No organizations' }}
+  </mat-card-title>
+  <mat-card-content *ngIf="organizations && organizations.length">
+  <mat-table #table [dataSource]="organizations">
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let organization"> {{organization.title}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let organization">
+        <button mat-button  mat-raised-button color="primary" routerLink="/organization/{{organization.id}}">View</button> 
+      </mat-cell>
+    </ng-container>  
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+    
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent" class="create-organization-button" routerLink="/organization-add">Create organization</button>
+  </mat-card-actions>
+</mat-card>
