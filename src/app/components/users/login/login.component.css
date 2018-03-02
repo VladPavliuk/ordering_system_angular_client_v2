@@ -1,0 +1,8 @@
+.user-data-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-data-container > * {
+    width: 100%;
+}

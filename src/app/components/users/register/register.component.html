@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-content>
+    <h2>Set your info</h2>
+    <div class="user-data-container">
+      <mat-form-field>
+        <input matInput (input)="onCutsomerFirstNameInput($event)" placeholder="Your first name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput (input)="onCutsomerLastNameInput($event)" placeholder="Your last name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput (input)="onCustomerPhoneInput($event)" placeholder="Your phone number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput (input)="onCustomerPhoneInput($event)" placeholder="Your phone number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput (input)="onCustomerPhoneInput($event)" placeholder="Your email address">
+      </mat-form-field>
+      <mat-form-field>
+
+        <input matInput type="password" (input)="onCustomerPhoneInput($event)" placeholder="Your passowrd">
+      </mat-form-field>
+    </div>
+    <button (click)="makeOrder()" color="primary" mat-raised-button>Register</button>
+  </mat-card-content>
+</mat-card>

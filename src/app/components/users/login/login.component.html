@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-content>
+        <h2>Set your info</h2>
+        <div class="user-data-container">
+
+            <mat-form-field>
+                <input matInput (input)="onEmailInput($event)" placeholder="Your phone number">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="password" (input)="onPasswordInput($event)" placeholder="Your password">
+            </mat-form-field>
+        </div>
+        <button (click)="login()" color="primary" mat-raised-button>Register</button>
+    </mat-card-content>
+</mat-card>
