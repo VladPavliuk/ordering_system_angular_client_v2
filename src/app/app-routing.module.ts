@@ -25,35 +25,44 @@ import {IndexComponent as UsersIndexComponent} from './components/users/index/in
 import {LoginComponent as UsersLoginComponent} from './components/users/login/login.component';
 //<
 
+//>Admins
+import {LoginComponent as AdminLoginComponent} from './components/admins/login/login.component';
+import {HomeComponent as AdminHomeComponent} from './components/admins/home/home.component';
+//<
+
 //> Guards
 import {UsersAuthGuard} from './guards/users-auth-guard';
 import {AdminsAuthGuard} from './guards/admins-auth-guard';
+import {AdminsGuestGuard} from './guards/admins-guest-guard';
 //<
 
 const routes: Routes = [
 
-    {path: '', redirectTo: '/organizations-list', pathMatch: 'full'},
+  {path: '', redirectTo: '/order', pathMatch: 'full'},
 
-    {path: 'organizations-list', component: OrganizationsIndexComponent, canActivate: [AdminsAuthGuard]},
-    {path: 'organization-add', component: OrganizationAddComponent, canActivate: [AdminsAuthGuard]},
-    {path: 'organization/:id', component: OrganizationSingleComponent, canActivate: [AdminsAuthGuard]},
-    {path: 'organization/:id/available-services', component: OrganizationAvailableServicesComponent},
+  {path: 'organizations-list', component: OrganizationsIndexComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'organization-add', component: OrganizationAddComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'organization/:id', component: OrganizationSingleComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'organization/:id/available-services', component: OrganizationAvailableServicesComponent},
 
-    {path: 'services-list', component: ServicesIndexComponent, canActivate: [AdminsAuthGuard]},
-    {path: 'service-add', component: ServiceAddComponent, canActivate: [AdminsAuthGuard]},
-    {path: 'service/:id', component: ServiceSingleComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'services-list', component: ServicesIndexComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'service-add', component: ServiceAddComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'service/:id', component: ServiceSingleComponent, canActivate: [AdminsAuthGuard]},
 
-    {path: 'order', component: CreateOrderComponent},
-    {path: 'orders', component: OrdersIndexComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'order', component: CreateOrderComponent},
+  {path: 'orders', component: OrdersIndexComponent, canActivate: [AdminsAuthGuard]},
 
-    {path: 'users', component: UsersIndexComponent, canActivate: [AdminsAuthGuard]},
-    {path: 'login', component: UsersLoginComponent},
+  {path: 'users', component: UsersIndexComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'login', component: UsersLoginComponent},
+
+  {path: 'admin/login', component: AdminLoginComponent, canActivate: [AdminsGuestGuard]},
+  {path: 'admin/home', component: AdminHomeComponent, canActivate: [AdminsAuthGuard]},
 
 ];
 
 @NgModule({
-    exports: [RouterModule],
-    imports: [RouterModule.forRoot(routes)]
+  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes)]
 })
 export class AppRoutingModule {
 }

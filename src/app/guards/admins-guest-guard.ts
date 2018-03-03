@@ -4,7 +4,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 
 @Injectable()
-export class AdminsAuthGuard implements CanActivate {
+export class AdminsGuestGuard implements CanActivate {
     constructor(
         private cookieService: CookieService,
         private router: Router
@@ -13,9 +13,9 @@ export class AdminsAuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.cookieService.check('admin_token')) {
-            return this.cookieService.check('admin_token');
+          this.router.navigate(['/admin/home']);
         } else {
-            this.router.navigate(['/admin/login']);
+          return !this.cookieService.check('admin_token');
         }
     }
 }

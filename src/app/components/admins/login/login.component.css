@@ -1,0 +1,8 @@
+.admin-data-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-data-container > * {
+    width: 100%;
+}

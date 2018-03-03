@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-content>
+    <h2>Admins login</h2>
+    <div class="admin-data-container">
+
+      <mat-form-field>
+        <input matInput (input)="onPhoneInput($event)" placeholder="Your phone number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" (input)="onPasswordInput($event)" placeholder="Your password">
+      </mat-form-field>
+    </div>
+    <button (click)="login()" color="primary" mat-raised-button>Login</button>
+  </mat-card-content>
+</mat-card>

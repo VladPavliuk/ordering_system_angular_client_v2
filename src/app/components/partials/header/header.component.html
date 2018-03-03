@@ -32,5 +32,9 @@
       <mat-icon>account_balance</mat-icon>
       <span>Organization</span>
     </button>
+    <button *ngIf="isAuthorized" (click)="adminLogout()" mat-menu-item>
+      <mat-icon>keyboard_backspace</mat-icon>
+      <span>Logout</span>
+    </button>
   </mat-menu>
 </mat-toolbar>
