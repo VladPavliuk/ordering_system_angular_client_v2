@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Organization } from '../../essences/Organization';
-import { Service } from '../../essences/Service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {Organization} from '../../essences/Organization';
+import {Service} from '../../essences/Service';
+import {AdminsService} from '../admins/admins.service';
 
 @Injectable()
 export class OrdersService {
 
   protected serverRoutes = {
-    domainURI: 'http://localhost:5000/api',
-    
+    domainURI: 'http://vladpavliuk-001-site1.itempurl.com/api',
     index(): string {
       return this.domainURI + '/orders';
     },
     store(): string {
-      return this.domainURI + '/orders';
+      return this.domainURI + '/make-order';
     },
     show(id: number): string {
       return this.domainURI + '/orders/' + id;
@@ -27,13 +27,17 @@ export class OrdersService {
     }
   };
 
-  constructor(private http: HttpClient) { }
-
-  index(): any {
-    return this.http.get(this.serverRoutes.index());
+  constructor(
+    private http: HttpClient,
+    private adminsService: AdminsService
+  ) {
   }
 
-  show(id: number): any  {
+  index(): any {
+    return this.http.get(this.serverRoutes.index(), {headers: {token: this.adminsService.getAuthToken()}});
+  }
+
+  show(id: number): any {
     return this.http.get(this.serverRoutes.show(id));
   }
 
@@ -42,7 +46,7 @@ export class OrdersService {
   }
 
   store(data: any): any {
-    console.log(this.serverRoutes.store());
+    console.log(this.serverRoutes.store(), {headers: {admin_token: this.adminsService.getAuthToken()}});
     return this.http.post(this.serverRoutes.store(), data);
   }
 

@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class AdminsService {
 
   protected serverRoutes = {
-    domainURI: 'http://localhost:5000/api',
+    domainURI: 'http://vladpavliuk-001-site1.itempurl.com/api',
     login(): string {
       return this.domainURI + '/admins/login';
     },
@@ -40,6 +40,10 @@ export class AdminsService {
 
   isAuthorized(): boolean {
     return this.cookieService.check('admin_token');
+  }
+
+  getAuthToken(): string {
+    return this.cookieService.get('admin_token');
   }
 
   logout(): void {

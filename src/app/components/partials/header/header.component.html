@@ -16,25 +16,25 @@
       <mat-icon>add_shopping_cart</mat-icon>
       <span>Make order</span>
     </button>
-    <button routerLink="/orders" mat-menu-item>
+    <button *ngIf="isAuthorized" routerLink="/orders" mat-menu-item>
       <mat-icon>list</mat-icon>
       <span>Orders</span>
     </button>
-    <button routerLink="/users" mat-menu-item>
+    <button *ngIf="isAuthorized" routerLink="/users" mat-menu-item>
       <mat-icon>perm_contact_calendar</mat-icon>
       <span>Users</span>
     </button>
-    <button routerLink="/services-list" mat-menu-item>
+    <button *ngIf="isAuthorized" routerLink="/services-list" mat-menu-item>
       <mat-icon>room_service</mat-icon>
       <span>Services</span>
     </button> 
-    <button routerLink="/organizations-list" mat-menu-item>
+    <button *ngIf="isAuthorized" routerLink="/organizations-list" mat-menu-item>
       <mat-icon>account_balance</mat-icon>
       <span>Organization</span>
     </button>
     <button *ngIf="isAuthorized" (click)="adminLogout()" mat-menu-item>
       <mat-icon>keyboard_backspace</mat-icon>
-      <span>Logout</span>
+      <span>Logout as admin</span>
     </button>
   </mat-menu>
 </mat-toolbar>

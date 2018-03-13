@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrganizationsService } from '../../../services/organizations/organizations.service';
 import { Organization } from '../../../essences/Organization';
 import {DataSource} from '@angular/cdk/collections';
+import {ServerApiService} from '../../../services/server-api/server-api.service';
 
 @Component({
   selector: 'app-index',
@@ -11,7 +12,6 @@ import {DataSource} from '@angular/cdk/collections';
 export class IndexComponent implements OnInit {
 
   organizations: Organization[];
-  
   displayedColumns = ['title', 'actions'];
 
   constructor(private organizationsService: OrganizationsService) { }

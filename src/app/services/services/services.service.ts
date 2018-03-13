@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Service } from '../../essences/Service';
+import {AdminsService} from '../admins/admins.service';
 
 @Injectable()
 export class ServicesService {
 
   protected serverRoutes = {
-    domainURI: 'http://localhost:5000/api',
+    domainURI: 'http://vladpavliuk-001-site1.itempurl.com/api',
     
     index(): string {
       return this.domainURI + '/services';
@@ -26,26 +27,29 @@ export class ServicesService {
     }
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private adminsService: AdminsService
+  ) { }
 
   index(): Observable<Service[]>  {
-    return this.http.get<Service[]>(this.serverRoutes.index());
+    return this.http.get<Service[]>(this.serverRoutes.index(), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   show(id: number): Observable<Service>  {
-    return this.http.get<Service>(this.serverRoutes.show(id));
+    return this.http.get<Service>(this.serverRoutes.show(id), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   update(id: number, data: any): any {
-    return this.http.put(this.serverRoutes.update(id), data);
+    return this.http.put(this.serverRoutes.update(id), data, {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   store(data: any): any {
     console.log(this.serverRoutes.store());
-    return this.http.post(this.serverRoutes.store(), data);
+    return this.http.post(this.serverRoutes.store(), data, {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   delete(id: number): any {
-    return this.http.delete(this.serverRoutes.delete(id));
+    return this.http.delete(this.serverRoutes.delete(id), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminsService} from '../../../services/admins/admins.service';
 import {Router} from '@angular/router';
+import {ServerApiService} from '../../../services/server-api/server-api.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,16 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private adminsService: AdminsService,
+    private serverApiService: ServerApiService,
     private router: Router
   ) {
   }
 
   ngOnInit() {
+    this.serverApiService.organizationApi.index()
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
   onPasswordInput($event: any) {

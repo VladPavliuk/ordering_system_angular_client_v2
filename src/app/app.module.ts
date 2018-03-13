@@ -34,6 +34,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './components/partials/header/header.component';
 
 //> Services
+import {ServerService} from './services/server/server.service';
+import {AuthService} from './services/auth/auth.service';
+import {ServerApiService} from './services/server-api/server-api.service';
 import {OrganizationsService} from './services/organizations/organizations.service';
 import {ServicesService} from './services/services/services.service';
 import {OrdersService} from './services/orders/orders.service';
@@ -116,6 +119,9 @@ import {HomeComponent} from './components/admins/home/home.component';
 
   ],
   providers: [
+    ServerService,
+    AuthService,
+    ServerApiService,
     OrganizationsService,
     ServicesService,
     OrdersService,

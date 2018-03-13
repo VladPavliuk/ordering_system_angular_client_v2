@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Organization } from '../../essences/Organization';
-import { Service } from '../../essences/Service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {Organization} from '../../essences/Organization';
+import {Service} from '../../essences/Service';
+import {AdminsService} from '../admins/admins.service';
 
 @Injectable()
 export class OrganizationsService {
 
   protected serverRoutes = {
-    domainURI: 'http://localhost:5000/api',
-    
+    domainURI: 'http://vladpavliuk-001-site1.itempurl.com/api',
+
     availableServices(id: number): string {
-      return this.domainURI + '/organizations/' + id +'/available-services';
+      return this.domainURI + '/organizations/' + id + '/available-services';
     },
     servicesList(id: number): string {
-      return this.domainURI + '/organizations/' + id +'/services-list';
+      return this.domainURI + '/organizations/' + id + '/services-list';
     },
     pinService(organizationId: number, serviceId: number): string {
       return this.domainURI + '/organizations/pin-service/' + organizationId + '/' + serviceId;
@@ -39,42 +40,46 @@ export class OrganizationsService {
     }
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private adminsService: AdminsService
+  ) {
+  }
 
   availableService(id: number): Observable<Service[]> {
-    return this.http.get<Service[]>(this.serverRoutes.availableServices(id));
+    return this.http.get<Service[]>(this.serverRoutes.availableServices(id), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   servicesList(id: number): Observable<Service[]> {
-    return this.http.get<Service[]>(this.serverRoutes.servicesList(id));
+    return this.http.get<Service[]>(this.serverRoutes.servicesList(id), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   pinService(organizationId: number, serviceId: number): any {
-    return this.http.post(this.serverRoutes.pinService(organizationId, serviceId), {});
+    return this.http.post(this.serverRoutes.pinService(organizationId, serviceId), {}, {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   unpinService(organizationId: number, serviceId: number): any {
-    return this.http.delete(this.serverRoutes.unpinService(organizationId, serviceId));
+    return this.http.delete(this.serverRoutes.unpinService(organizationId, serviceId), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
-  index(): Observable<Organization[]>  {
-    return this.http.get<Organization[]>(this.serverRoutes.index());
+  index(): Observable<Organization[]> {
+    return this.http.get<Organization[]>(this.serverRoutes.index(), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
-  show(id: number): Observable<Organization>  {
-    return this.http.get<Organization>(this.serverRoutes.show(id));
+  show(id: number): Observable<Organization> {
+    return this.http.get<Organization>(this.serverRoutes.show(id), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   update(id: number, data: any): any {
-    return this.http.put(this.serverRoutes.update(id), data);
+    return this.http.put(this.serverRoutes.update(id), data, {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   store(data: any): any {
     console.log(this.serverRoutes.store());
-    return this.http.post(this.serverRoutes.store(), data);
+    return this.http.post(this.serverRoutes.store(), data, {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
   delete(id: number): any {
-    return this.http.delete(this.serverRoutes.delete(id));
+    return this.http.delete(this.serverRoutes.delete(id), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 }
