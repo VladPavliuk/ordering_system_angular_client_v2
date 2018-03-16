@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {Organization} from '../../essences/Organization';
 import {Service} from '../../essences/Service';
 import {ServerService} from '../server/server.service';
+import {User} from '../../essences/User';
 
 @Injectable()
 export class ServerApiService {
@@ -32,10 +33,49 @@ interface StandardActions<T> {
 
 // class AdminApi implements StandardActions {
 // }
-//
-// class UserApi implements StandardActions {
-// }
-//
+
+class UserApi implements StandardActions<User> {
+  public constructor(
+    private serverService: ServerService
+  ) {
+  }
+
+  store(organization: User): Observable<User> {
+    return this.serverService.request({
+      method: 'post',
+      url: 'api/organizations'
+    });
+  }
+
+  index(): Observable<User[]> {
+    return this.serverService.request({
+      method: 'get',
+      url: 'api/organizations'
+    });
+  }
+
+  show(id: number): Observable<User> {
+    return this.serverService.request({
+      method: 'get',
+      url: 'api/organizations/' + id
+    });
+  }
+
+  update(id: number, organization: User): Observable<User> {
+    return this.serverService.request({
+      method: 'put',
+      url: 'api/organizations/' + id
+    });
+  }
+
+  destroy(id: number): Observable<any> {
+    return this.serverService.request({
+      method: 'delete',
+      url: 'api/organizations/' + id
+    });
+  }
+}
+
 // class OrderApi implements StandardActions {
 // }
 

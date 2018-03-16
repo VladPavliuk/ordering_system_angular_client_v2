@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Service } from '../../essences/Service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {Service} from '../../essences/Service';
 import {AdminsService} from '../admins/admins.service';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class ServicesService {
 
   protected serverRoutes = {
     domainURI: 'http://vladpavliuk-001-site1.itempurl.com/api',
-    
+
     index(): string {
       return this.domainURI + '/services';
     },
@@ -30,13 +30,14 @@ export class ServicesService {
   constructor(
     private http: HttpClient,
     private adminsService: AdminsService
-  ) { }
+  ) {
+  }
 
-  index(): Observable<Service[]>  {
+  index(): Observable<Service[]> {
     return this.http.get<Service[]>(this.serverRoutes.index(), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
-  show(id: number): Observable<Service>  {
+  show(id: number): Observable<Service> {
     return this.http.get<Service>(this.serverRoutes.show(id), {headers: {admin_token: this.adminsService.getAuthToken()}});
   }
 
