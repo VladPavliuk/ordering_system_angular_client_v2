@@ -19,7 +19,8 @@ import {
   MatTooltipModule,
   MatGridListModule,
   MatSelectModule,
-  MatListModule
+  MatListModule,
+  MatSnackBarModule
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 import {CdkTableModule} from '@angular/cdk/table';
@@ -32,6 +33,7 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './components/partials/header/header.component';
+import {SnackBarComponent} from './components/partials/snack-bar/snack-bar.component';
 
 //> Services
 import {ServerService} from './services/server/server.service';
@@ -70,6 +72,7 @@ import {AdminsAuthGuard} from './guards/admins-auth-guard';
 import {AdminsGuestGuard} from './guards/admins-guest-guard';
 import {LoginComponent} from './components/admins/login/login.component';
 import {HomeComponent} from './components/admins/home/home.component';
+import {DashboardComponent} from './components/users/dashboard/dashboard.component';
 
 //<
 
@@ -92,7 +95,12 @@ import {HomeComponent} from './components/admins/home/home.component';
     UsersLoginComponent,
     RegisterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    DashboardComponent,
+    SnackBarComponent
+  ],
+  entryComponents: [
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -115,6 +123,7 @@ import {HomeComponent} from './components/admins/home/home.component';
     MatSelectModule,
     MatListModule,
     MatTableModule,
+    MatSnackBarModule,
     CdkTableModule,
 
   ],

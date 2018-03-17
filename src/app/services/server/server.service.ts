@@ -16,13 +16,13 @@ export class ServerService {
     private authService: AuthService
   ) {
     this.apiDomain = 'http://localhost:5000/';
-    this.AUTH_TOKEN_HEADER_KEY = 'user_token';
+    this.AUTH_TOKEN_HEADER_KEY = 'Authorization';
   }
 
   public request(requestParams: RequestStructure): Observable<any> {
 
-    requestParams = this.defineAuth(requestParams);
     requestParams = this.defineHeaders(requestParams);
+    requestParams = this.defineAuth(requestParams);
 
     return this.httpDriver.request(requestParams.method, this.apiDomain + requestParams.url, {
       headers: requestParams.headers,
@@ -40,7 +40,7 @@ export class ServerService {
 
   private defineAuth(requestParams: RequestStructure): RequestStructure {
     if (requestParams.auth) {
-      requestParams.headers[this.AUTH_TOKEN_HEADER_KEY] = this.authService.getToken();
+      requestParams.headers[this.AUTH_TOKEN_HEADER_KEY] = 'Bearer ' + this.authService.getToken();
     }
     return requestParams;
   }

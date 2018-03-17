@@ -5,11 +5,13 @@ import {CookieService} from 'ngx-cookie-service';
 export class AuthService {
 
   private readonly TOKEN_KEY_IN_STORAGE: string;
+  private readonly IS_ADMIN_KEY_IN_STORAGE: string;
 
   constructor(
     private cookieService: CookieService
   ) {
     this.TOKEN_KEY_IN_STORAGE = 'user_token';
+    this.IS_ADMIN_KEY_IN_STORAGE = 'is_admin';
   }
 
   public getToken(): string {
@@ -21,6 +23,14 @@ export class AuthService {
   }
 
   public isAuthorized(): boolean {
-    return  this.cookieService.check(this.TOKEN_KEY_IN_STORAGE);
+    return this.cookieService.check(this.TOKEN_KEY_IN_STORAGE);
+  }
+
+  public setIsAdmin(status): void{
+    return this.cookieService.set(this.IS_ADMIN_KEY_IN_STORAGE, status);
+  }
+
+  public isAdmin(): boolean {
+    return this.cookieService.check(this.IS_ADMIN_KEY_IN_STORAGE);
   }
 }

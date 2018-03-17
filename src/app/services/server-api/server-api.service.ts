@@ -5,7 +5,7 @@ import {Service} from '../../essences/Service';
 import {ServerService} from '../server/server.service';
 import {User} from '../../essences/User';
 import {AuthService} from '../auth/auth.service';
-import {tap} from 'rxjs/operators';
+import {tap, catchError} from 'rxjs/operators';
 
 @Injectable()
 export class ServerApiService {
@@ -56,7 +56,10 @@ class UserApi implements StandardActions<User> {
       url: 'api/auth/login'
     }).pipe(
       tap(res => {
-        this.authService.setToken(res['auth_token']);
+        if (res['auth_token']) {
+          this.authService.setToken(res['auth_token']);
+          this.authService.setIsAdmin(res['is_admin']);
+        }
       })
     );
   }

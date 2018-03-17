@@ -58,7 +58,7 @@ export class CreateComponent implements OnInit {
       StartedAt: moment(this.startingDate).format('YYYY-MM-DDTHH:mm:ss')
     }).subscribe(res => {
       this.location.back();
-    })
+    });
   }
 
   onOrganizationSelect(organizationId: number) {

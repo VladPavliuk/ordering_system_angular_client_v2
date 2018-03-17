@@ -3,3 +3,14 @@
 /* Angular material */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+
+
+.success {
+    background-color: #1ebf3e;
+    color: #262626;
+}
+
+.error {
+    background-color: #ff4f31;
+    color: #fff;
+}
