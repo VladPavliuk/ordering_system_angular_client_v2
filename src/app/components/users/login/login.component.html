@@ -4,13 +4,13 @@
         <div class="user-data-container">
 
             <mat-form-field>
-                <input matInput (input)="onEmailInput($event)" placeholder="Your phone number">
+                <input matInput (input)="onEmailInput($event)" placeholder="Your email">
             </mat-form-field>
 
             <mat-form-field>
                 <input matInput type="password" (input)="onPasswordInput($event)" placeholder="Your password">
             </mat-form-field>
         </div>
-        <button (click)="login()" color="primary" mat-raised-button>Register</button>
+        <button (click)="login()" color="primary" mat-raised-button>Login</button>
     </mat-card-content>
 </mat-card>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersService} from '../../../services/users/users.service';
+import {ServerApiService} from '../../../services/server-api/server-api.service'
 
 @Component({
     selector: 'app-login',
@@ -10,7 +10,9 @@ export class LoginComponent implements OnInit {
     public email: string;
     public password: string;
 
-    constructor(private usersService: UsersService) {
+    constructor(
+      private serverApiService: ServerApiService
+    ) {
     }
 
     ngOnInit() {
@@ -25,11 +27,11 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.usersService.login({
-            email: this.email,
-            password: this.password
-        }).subscribe(res => {
-            console.log(res);
-        });
+        this.serverApiService.userApi.login(this.email, this.password)
+          .subscribe(res => {
+              console.log(res);
+              console.log(res);
+              console.log(res);
+          });
     }
 }

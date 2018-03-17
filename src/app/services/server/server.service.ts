@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {RequestStructure} from '../../essences/RequestStructure';
 import {AuthService} from '../../services/auth/auth.service';
+import {HttpHeaders} from '@angular/common/http/src/headers';
 
 @Injectable()
 export class ServerService {
@@ -19,15 +20,27 @@ export class ServerService {
   }
 
   public request(requestParams: RequestStructure): Observable<any> {
+
     requestParams = this.defineAuth(requestParams);
+    requestParams = this.defineHeaders(requestParams);
+
     return this.httpDriver.request(requestParams.method, this.apiDomain + requestParams.url, {
-      headers: requestParams.headers
+      headers: requestParams.headers,
+      body: requestParams.body
     });
+  }
+
+  private defineHeaders(requestParams: RequestStructure): RequestStructure {
+    if (!requestParams.headers) {
+      requestParams.headers = {};
+    }
+    requestParams.headers['Content-Type'] = 'application/json';
+    return requestParams;
   }
 
   private defineAuth(requestParams: RequestStructure): RequestStructure {
     if (requestParams.auth) {
-      requestParams.headers.set(this.AUTH_TOKEN_HEADER_KEY, this.authService.getToken());
+      requestParams.headers[this.AUTH_TOKEN_HEADER_KEY] = this.authService.getToken();
     }
     return requestParams;
   }

@@ -4,17 +4,22 @@ import {Organization} from '../../essences/Organization';
 import {Service} from '../../essences/Service';
 import {ServerService} from '../server/server.service';
 import {User} from '../../essences/User';
+import {AuthService} from '../auth/auth.service';
+import {tap} from 'rxjs/operators';
 
 @Injectable()
 export class ServerApiService {
   public organizationApi: OrganizationApi;
   public serviceApi: ServiceApi;
+  public userApi: UserApi;
 
   public constructor(
     private serverService: ServerService,
+    private authService: AuthService,
   ) {
     this.organizationApi = new OrganizationApi(serverService);
     this.serviceApi = new ServiceApi(serverService);
+    this.userApi = new UserApi(serverService, authService);
   }
 
 }
@@ -36,8 +41,24 @@ interface StandardActions<T> {
 
 class UserApi implements StandardActions<User> {
   public constructor(
-    private serverService: ServerService
+    private serverService: ServerService,
+    private authService: AuthService
   ) {
+  }
+
+  login(userName: string, password: string): Observable<any> {
+    return this.serverService.request({
+      method: 'post',
+      body: {
+        email: userName,
+        password: password
+      },
+      url: 'api/auth/login'
+    }).pipe(
+      tap(res => {
+        this.authService.setToken(res['auth_token']);
+      })
+    );
   }
 
   store(organization: User): Observable<User> {
