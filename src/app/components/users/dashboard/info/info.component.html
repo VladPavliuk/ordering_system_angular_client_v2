@@ -1,12 +1,18 @@
 <div *ngIf="user" class="user-wrapper">
     <table>
         <tr>
-            <td>
+            <td (mouseenter)="onAvatarMouseOver()"
+                (mouseleave)="onAvatarMouseOut()">
                 <div class="user-image-wrapper">
                     <img *ngIf="user.imagePath"
+
                          [src]="'http://localhost:5000/' + user.imagePath"
                          alt="Profile image"
                          title="Profile image">
+                    <button *ngIf="showUploadAvatarButton"
+                            (click)="onSetAvatarClick()"
+                            class="upload-avatar-button">Оновити
+                    </button>
                 </div>
             </td>
             <td>
@@ -22,5 +28,8 @@
         </tr>
     </table>
 
-    <input type="file" (change)="onAvatarSelect($event)" value="Upload photo">
+    <input type="file"
+           #avatar_input
+           (change)="onAvatarSelect($event)"
+           style="display: none;">
 </div>
