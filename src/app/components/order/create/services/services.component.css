@@ -1,8 +1,31 @@
 .service-form-container {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
 }
 
-.service-form-container > * {
+.item {
+    display: inline-block;
+    width: 33.333%;
+}
+
+.item:hover{
+    background-color: #6c6e6c;
+    cursor: pointer;
+}
+
+.item-label {
+    text-align: center;
+    font-size: 18pt;
+    text-transform: uppercase;
+}
+
+.item-icon {
+    text-align: center;
+}
+
+.material-icons {
+    font-size: 150pt !important;
+}
+
+.mat-icon  {
     width: 100%;
 }

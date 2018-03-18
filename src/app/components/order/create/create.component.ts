@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { OrganizationsService } from '../../../services/organizations/organizations.service';
-import { OrdersService } from '../../../services/orders/orders.service';
-import { ServicesService } from '../../../services/services/services.service';
-import { Organization } from '../../../essences/Organization';
-import { Service } from '../../../essences/Service';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {OrganizationsService} from '../../../services/organizations/organizations.service';
+import {OrdersService} from '../../../services/orders/orders.service';
+import {ServicesService} from '../../../services/services/services.service';
+import {Organization} from '../../../essences/Organization';
+import {Service} from '../../../essences/Service';
+import {Location} from '@angular/common';
 import * as moment from 'moment';
+import {ServerApiService} from '../../../services/server-api/server-api.service';
 
 @Component({
   selector: 'app-create',
@@ -14,10 +15,12 @@ import * as moment from 'moment';
 })
 export class CreateComponent implements OnInit {
 
-  private selectedOrganization: Organization;
+  public selectedOrganization: Organization;
+  public selectedService: Service;
+
   public services: Service[];
   public organizations: Organization[];
-  
+
   private customerFirstName: string;
   private customerLastName: string;
   private customerPhone: string;
@@ -28,11 +31,13 @@ export class CreateComponent implements OnInit {
     private organizationsService: OrganizationsService,
     private servicesService: ServicesService,
     private ordersService: OrdersService,
-    private location: Location
-  ) { }
+    private location: Location,
+    private serverApiService: ServerApiService
+  ) {
+  }
 
   ngOnInit() {
-    this.getOrganizations();
+    this.getServices();
   }
 
   setStartingDate(event): void {
@@ -40,55 +45,51 @@ export class CreateComponent implements OnInit {
   }
 
   getOrganizations(): void {
-    this.organizationsService.index()
+    this.serverApiService.organizationApi.index()
       .subscribe(res => {
         this.organizations = res;
       });
   }
 
+  getServices(): void {
+    this.serverApiService.serviceApi.index()
+      .subscribe(res => {
+        this.services = res;
+      });
+  }
+
   makeOrder(): void {
-    this.ordersService.store({
-      FirstName: this.customerFirstName,
-      LastName: this.customerLastName,
-      Phone: this.customerPhone,
+    this.serverApiService.orderApi.store({
+      // FirstName: this.customerFirstName,
+      // LastName: this.customerLastName,
+      // Phone: this.customerPhone,
       Organization_ID: this.selectedOrganization.id,
-      Service_ID: this.customerService.id,
-      Price: this.customerService.price,
-      Duration: this.customerService.duration,
+      Service_ID: this.selectedService.id,
+      Price: this.selectedService.price,
+      Duration: this.selectedService.duration,
       StartedAt: moment(this.startingDate).format('YYYY-MM-DDTHH:mm:ss')
     }).subscribe(res => {
       this.location.back();
     });
   }
 
-  onOrganizationSelect(organizationId: number) {
-    this.organizationsService.show(organizationId)
-      .subscribe(res => {
-        this.selectedOrganization = res;
-      });
-
-    this.organizationsService.servicesList(organizationId)
-      .subscribe(res => {
-        this.services = res;
-      });
+  onOrganizationSelect(organization: Organization) {
+    this.selectedOrganization = organization;
   }
 
-  onCutsomerFirstNameInput(event): void {
+  onCustomerUserNameInput(event): void {
     this.customerFirstName = event.target.value;
-  }
-
-  onCutsomerLastNameInput(event): void {
-    this.customerLastName = event.target.value;
   }
 
   onCustomerPhoneInput(event): void {
     this.customerPhone = event.target.value;
   }
 
-  onServiceSelect(serviceId: number) {
-    this.servicesService.show(serviceId)
+  onServiceSelect(service: Service) {
+    this.selectedService = service;
+    this.serverApiService.serviceApi.organizationsList(service.id)
       .subscribe(res => {
-        this.customerService = res;
+        this.organizations = res;
       });
   }
 

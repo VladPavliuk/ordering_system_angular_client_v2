@@ -8,8 +8,8 @@ import { Organization } from '../../../../essences/Organization';
   styleUrls: ['./organizations.component.css']
 })
 export class OrganizationsComponent implements OnInit {
-
-  @Output() onOrganizationSelected = new EventEmitter<number>();
+  public displayedColumns = ['avatar', 'title', 'actions'];
+  @Output() onOrganizationSelected = new EventEmitter<Organization>();
 
   @Input() public organizations: Organization[];
 
@@ -19,8 +19,8 @@ export class OrganizationsComponent implements OnInit {
     
   }
 
-  onOrganizationSelect(organizationId: any): void {
-    this.onOrganizationSelected.emit(parseInt(organizationId.value));
+  onOrganizationSelect(organization: Organization): void {
+    this.onOrganizationSelected.emit(organization);
   }
 
 

@@ -6,3 +6,8 @@
 .organization-form-container > * {
     width: 100%;
 }
+
+.organization-avatar {
+    height: 80px;
+    padding: 5px;
+}

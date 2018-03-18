@@ -12,6 +12,7 @@ export class ServerApiService {
   public organizationApi: OrganizationApi;
   public serviceApi: ServiceApi;
   public userApi: UserApi;
+  public orderApi: OrderApi;
 
   public constructor(
     private serverService: ServerService,
@@ -20,6 +21,7 @@ export class ServerApiService {
     this.organizationApi = new OrganizationApi(serverService);
     this.serviceApi = new ServiceApi(serverService);
     this.userApi = new UserApi(serverService, authService);
+    this.orderApi = new OrderApi(serverService, authService);
   }
 
 }
@@ -38,6 +40,23 @@ interface StandardActions<T> {
 
 // class AdminApi implements StandardActions {
 // }
+
+class OrderApi {
+  public constructor(
+    private serverService: ServerService,
+    private authService: AuthService
+  ) {
+  }
+
+  store(order: any): Observable<any> {
+    return this.serverService.request({
+      method: 'post',
+      auth: true,
+      body: order,
+      url: 'api/orders/make-order'
+    });
+  }
+}
 
 class UserApi implements StandardActions<User> {
   public constructor(
@@ -234,6 +253,13 @@ class ServiceApi implements StandardActions<Service> {
       auth: true,
       url: 'api/services',
       body: service
+    });
+  }
+
+  organizationsList(id: number): Observable<Organization[]> {
+    return this.serverService.request({
+      method: 'get',
+      url: 'api/services/' + id + '/organizations'
     });
   }
 

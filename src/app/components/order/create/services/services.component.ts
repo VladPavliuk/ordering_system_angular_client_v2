@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { ServicesService } from '../../../../services/services/services.service';
-import { Service } from '../../../../essences/Service';
+import {Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
+import {ServicesService} from '../../../../services/services/services.service';
+import {Service} from '../../../../essences/Service';
 
 @Component({
   selector: 'app-order-services',
@@ -10,16 +10,17 @@ import { Service } from '../../../../essences/Service';
 export class ServicesComponent implements OnInit {
 
   @Input() public services: Service[];
-  @Output() public onServiceSelected =  new EventEmitter<number>();
+  @Output() public onServiceSelected = new EventEmitter<Service>();
 
-  constructor(private servicesService: ServicesService) { }
-
-  ngOnInit() {
-    
+  constructor(private servicesService: ServicesService) {
   }
 
-  onServiceSelect(serviceId: any): void {
-    this.onServiceSelected.emit(parseInt(serviceId.value));
+  ngOnInit() {
+
+  }
+
+  onServiceSelect(service: Service): void {
+    this.onServiceSelected.emit(service);
   }
 
 }
