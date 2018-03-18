@@ -36,6 +36,7 @@ import {HeaderComponent} from './components/partials/header/header.component';
 import {SnackBarComponent} from './components/partials/snack-bar/snack-bar.component';
 
 //> Services
+import {SnackBarService} from './services/snack-bar/snack-bar.service';
 import {ServerService} from './services/server/server.service';
 import {AuthService} from './services/auth/auth.service';
 import {ServerApiService} from './services/server-api/server-api.service';
@@ -130,6 +131,7 @@ import {DashboardComponent} from './components/users/dashboard/dashboard.compone
   providers: [
     ServerService,
     AuthService,
+    SnackBarService,
     ServerApiService,
     OrganizationsService,
     ServicesService,

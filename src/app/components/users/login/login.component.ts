@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ServerApiService} from '../../../services/server-api/server-api.service';
-import {MatSnackBar} from '@angular/material';
-import {SnackBarComponent} from '../../partials/snack-bar/snack-bar.component';
 import {Router} from '@angular/router';
+import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private serverApiService: ServerApiService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBarService: SnackBarService,
   ) {
   }
 
@@ -34,7 +33,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.serverApiService.userApi.login(this.email, this.password)
       .subscribe(res => {
-        this.snackBar.openFromComponent(SnackBarComponent, {
+        this.snackBarService.show({
           data: {
             message: 'Success login!',
           },
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       }, err => {
         if (err.status === 400) {
-          this.snackBar.openFromComponent(SnackBarComponent, {
+          this.snackBarService.show({
             data: {
               message: 'Invalid!',
             },
