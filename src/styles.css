@@ -1,13 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Angular material */
-@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 
 
 .success {
-    background-color: #1ebf3e;
-    color: #262626;
+    background-color: #00b244;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #e6e6e6;
 }
 
 .error {

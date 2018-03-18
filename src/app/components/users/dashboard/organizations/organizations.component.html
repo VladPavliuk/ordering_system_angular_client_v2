@@ -1,6 +1,6 @@
 <div>
-  <h4>Your organizations</h4>
-  <mat-table #table [dataSource]="usersOrganizations">
+  <h4>{{ usersOrganizations && usersOrganizations.length > 0 ? 'Your organizations' : 'No organizations' }}</h4>
+  <mat-table *ngIf="usersOrganizations && usersOrganizations.length > 0" #table [dataSource]="usersOrganizations">
     <ng-container matColumnDef="avatar">
     <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
     <mat-cell *matCellDef="let organization">

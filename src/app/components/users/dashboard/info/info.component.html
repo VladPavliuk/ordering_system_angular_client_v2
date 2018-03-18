@@ -3,16 +3,21 @@
         <tr>
             <td (mouseenter)="onAvatarMouseOver()"
                 (mouseleave)="onAvatarMouseOut()">
-                <div class="user-image-wrapper">
-                    <img *ngIf="user.imagePath"
-
-                         [src]="'http://localhost:5000/' + user.imagePath"
+                <div *ngIf="user.imagePath"
+                     class="user-image-wrapper">
+                    <img [src]="'http://localhost:5000/' + user.imagePath"
                          alt="Profile image"
                          title="Profile image">
                     <button *ngIf="showUploadAvatarButton"
                             (click)="onSetAvatarClick()"
                             class="upload-avatar-button">
                         Update
+                    </button>
+                </div>
+                <div *ngIf="!user.imagePath">
+                    <button (click)="onSetAvatarClick()"
+                            mat-raised-button color="accent">
+                        Set your avatar
                     </button>
                 </div>
             </td>

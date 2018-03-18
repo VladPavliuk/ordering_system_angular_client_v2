@@ -17,7 +17,7 @@ export class SingleComponent implements OnInit {
   public organization: Organization;
   public isOrganizationBelongToMe = false;
   public services: Service[];
-  public displayedColumns = ['id', 'title', 'price', 'duration', 'actions'];
+  public displayedColumns = ['title', 'price', 'duration', 'actions'];
   public showUploadAvatarButton = false;
   public selectedAvatar: { file: any,  title: string } = { file: '', title: ''};
   @ViewChild('avatar_input') avatarInput;
@@ -60,6 +60,13 @@ export class SingleComponent implements OnInit {
     this.serverApiService.organizationApi.setAvatar(this.organization.id, formData)
       .subscribe(res => {
         this.getOrganization(this.organization.id);
+        this.snackBarService.show({
+          data: {
+            message: 'Avatar changed!',
+          },
+          panelClass: 'success',
+          duration: 1000
+        });
       });
   }
 
@@ -88,6 +95,13 @@ export class SingleComponent implements OnInit {
     this.serverApiService.organizationApi.destroy(this.organization.id)
       .subscribe(res => {
         this.location.back();
+        this.snackBarService.show({
+          data: {
+            message: 'Organization deleted!',
+          },
+          panelClass: 'success',
+          duration: 1000
+        });
       });
   }
 
