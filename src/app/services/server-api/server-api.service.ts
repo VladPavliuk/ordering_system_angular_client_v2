@@ -56,6 +56,15 @@ class OrderApi {
       url: 'api/orders/make-order'
     });
   }
+
+  public getAuthUserOrders(): Observable<any> {
+    return this.serverService.request({
+      method: 'get',
+      auth: true,
+      url: 'api/orders/auth-user-orders'
+    });
+  }
+
 }
 
 class UserApi implements StandardActions<User> {
