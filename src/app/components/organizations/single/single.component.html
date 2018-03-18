@@ -27,8 +27,8 @@
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
           <mat-cell *matCellDef="let service">
-            <button mat-button  mat-raised-button color="primary" routerLink="/service/{{service.service_ID.id}}">View</button> 
-            <button mat-button  mat-raised-button color="warn" (click)="unpinService(service.service_ID.id)">Unpin</button> 
+            <button *ngIf="isOrganizationBelongToMe" mat-button  mat-raised-button color="primary" routerLink="/service/{{service.service_ID.id}}">View</button>
+            <button *ngIf="isOrganizationBelongToMe" mat-button  mat-raised-button color="warn" (click)="unpinService(service.service_ID.id)">Unpin</button>
           </mat-cell>
         </ng-container>  
     

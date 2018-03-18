@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ServicesService } from '../../../services/services/services.service';
 import { Service } from '../../../essences/Service';
 import { Location } from '@angular/common';
+import {ServerApiService} from '../../../services/server-api/server-api.service';
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-single',
@@ -11,30 +13,37 @@ import { Location } from '@angular/common';
 })
 export class SingleComponent implements OnInit {
 
+  public isAdmin = false;
   public service: Service;
 
   constructor(
     private route: ActivatedRoute,
-    private servicesService: ServicesService,
+    private serverApiService: ServerApiService,
+    private authServer: AuthService,
     private location: Location
   ) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
+    this.checkIsAdmin();
 
     this.getOrganization(id);
   }
 
+  checkIsAdmin() {
+    this.isAdmin = this.authServer.isAdmin();
+  }
+
   getOrganization(id: number) {
-    this.servicesService.show(id)
+    this.serverApiService.serviceApi.show(id)
       .subscribe(res => {
         this.service = res;
       });
   }
 
   delete() {
-    this.servicesService.delete(this.service.id)
-      .subscribe(res => { this.location.back() });
+    this.serverApiService.serviceApi.destroy(this.service.id)
+      .subscribe(res => { this.location.back(); });
   }
 
 }

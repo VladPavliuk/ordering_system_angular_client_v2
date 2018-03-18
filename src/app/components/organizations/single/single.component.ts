@@ -5,6 +5,7 @@ import {Organization} from '../../../essences/Organization';
 import {Service} from '../../../essences/Service';
 import {Location} from '@angular/common';
 import {ServerApiService} from '../../../services/server-api/server-api.service';
+import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 
 @Component({
   selector: 'app-single',
@@ -21,7 +22,8 @@ export class SingleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private serverApiService: ServerApiService,
-    private location: Location
+    private location: Location,
+    private snackBarService: SnackBarService
   ) {
   }
 
@@ -65,6 +67,13 @@ export class SingleComponent implements OnInit {
     this.serverApiService.organizationApi.unpinService(this.organization.id, serviceId)
       .subscribe(res => {
         this.getServicesList(this.organization.id);
+        this.snackBarService.show({
+          data: {
+            message: `Service unpined`,
+          },
+          panelClass: 'success',
+          duration: 1000
+        });
       });
   }
 

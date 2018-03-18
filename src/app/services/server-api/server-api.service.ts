@@ -147,11 +147,27 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
+  availableService(id: number): Observable<Service[]> {
+    return this.serverService.request({
+      method: 'get',
+      auth: true,
+      url: 'api/organizations/' + id + '/available-services'
+    });
+  }
+
+  pinService(organizationId: number, serviceId: number): any {
+    return this.serverService.request({
+      method: 'post',
+      auth: true,
+      url: 'api/organizations/pin-service/' + organizationId + '/' + serviceId
+    });
+  }
+
   unpinService(organizationId: number, serviceId: number): Observable<any> {
     return this.serverService.request({
       method: 'delete',
       auth: true,
-      url: '/organizations/unpin-service/' + organizationId + '/' + serviceId
+      url: 'api/organizations/unpin-service/' + organizationId + '/' + serviceId
     });
   }
 
@@ -196,28 +212,30 @@ class ServiceApi implements StandardActions<Service> {
   index(): Observable<Service[]> {
     return this.serverService.request({
       method: 'get',
-      url: 'api/organizations'
+      url: 'api/services'
     });
   }
 
   show(id: number): Observable<Service> {
     return this.serverService.request({
       method: 'get',
-      url: 'api/organizations/' + id
+      url: 'api/services/' + id
     });
   }
 
   update(id: number, organization: Service): Observable<Service> {
     return this.serverService.request({
       method: 'put',
-      url: 'api/organizations/' + id
+      auth: true,
+      url: 'api/services/' + id
     });
   }
 
   destroy(id: number): Observable<any> {
     return this.serverService.request({
       method: 'delete',
-      url: 'api/organizations/' + id
+      auth: true,
+      url: 'api/services/' + id
     });
   }
 }

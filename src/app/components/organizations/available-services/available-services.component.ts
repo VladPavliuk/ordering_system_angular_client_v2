@@ -4,6 +4,8 @@ import {Service} from '../../../essences/Service';
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../services/auth/auth.service';
+import {ServerApiService} from '../../../services/server-api/server-api.service';
+import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 
 @Component({
   selector: 'app-available-services',
@@ -17,10 +19,11 @@ export class AvailableServicesComponent implements OnInit {
   public displayedColumns = ['id', 'title', 'price', 'duration', 'actions'];
 
   constructor(
-    private organizationsService: OrganizationsService,
+    private serverApiService: ServerApiService,
     private route: ActivatedRoute,
     private location: Location,
-    private authServer: AuthService
+    private authServer: AuthService,
+    private snackBarService: SnackBarService
   ) {
   }
 
@@ -35,15 +38,22 @@ export class AvailableServicesComponent implements OnInit {
   }
 
   getAvailableServices(id: number): void {
-    this.organizationsService.availableService(id)
+    this.serverApiService.organizationApi.availableService(id)
       .subscribe(res => {
         this.availableServices = res;
       });
   }
 
   pinService(serviceId: number): void {
-    this.organizationsService.pinService(this.organizationId, serviceId)
+    this.serverApiService.organizationApi.pinService(this.organizationId, serviceId)
       .subscribe(res => {
+        this.snackBarService.show({
+          data: {
+            message: `Service pined`,
+          },
+          panelClass: 'success',
+          duration: 1000
+        });
         this.location.back();
       });
   }
