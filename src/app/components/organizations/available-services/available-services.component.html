@@ -42,7 +42,7 @@
         <h3>No available services to add</h3>
     </ng-template>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="isAdmin">
       <button mat-raised-button color="accent" routerLink="/service-add">Create service</button>
     </mat-card-actions>
   </mat-card>

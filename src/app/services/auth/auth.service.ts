@@ -22,6 +22,15 @@ export class AuthService {
     this.cookieService.set(this.TOKEN_KEY_IN_STORAGE, token);
   }
 
+  public deleteToken(): void {
+    this.cookieService.delete(this.TOKEN_KEY_IN_STORAGE);
+    this.deleteAdminStatusToken();
+  }
+
+  public deleteAdminStatusToken(): void {
+    this.cookieService.delete(this.IS_ADMIN_KEY_IN_STORAGE);
+  }
+
   public isAuthorized(): boolean {
     return this.cookieService.check(this.TOKEN_KEY_IN_STORAGE);
   }
@@ -31,6 +40,6 @@ export class AuthService {
   }
 
   public isAdmin(): boolean {
-    return this.cookieService.check(this.IS_ADMIN_KEY_IN_STORAGE);
+    return this.cookieService.get(this.IS_ADMIN_KEY_IN_STORAGE) === 'true';
   }
 }

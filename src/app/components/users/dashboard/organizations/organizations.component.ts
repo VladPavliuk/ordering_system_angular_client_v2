@@ -22,7 +22,7 @@ export class OrganizationsComponent implements OnInit {
   }
 
   getUsersOrganizations(): void {
-    this.serverApiService.userApi.organiztionsOwnerList()
+    this.serverApiService.userApi.organizationsOwnerList()
       .subscribe(res => {
         this.usersOrganizations = res;
       });

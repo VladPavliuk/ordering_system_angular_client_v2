@@ -5,6 +5,7 @@ import {RequestStructure} from '../../essences/RequestStructure';
 import {AuthService} from '../../services/auth/auth.service';
 import {HttpHeaders} from '@angular/common/http/src/headers';
 import {SnackBarService} from '../snack-bar/snack-bar.service';
+import {tap} from 'rxjs/operators';
 
 @Injectable()
 export class ServerService {
@@ -22,14 +23,22 @@ export class ServerService {
   }
 
   public request(requestParams: RequestStructure): Observable<any> {
-
     requestParams = this.defineHeaders(requestParams);
     requestParams = this.defineAuth(requestParams);
 
     return this.httpDriver.request(requestParams.method, this.apiDomain + requestParams.url, {
       headers: requestParams.headers,
       body: requestParams.body
-    });
+    }).pipe(
+      tap(res => {
+        console.log('');
+        console.log('|-----------------------------------------------------------------------------------------------');
+        console.log('|REQUEST:', requestParams);
+        console.log('|RESPONSE:', res);
+        console.log('|-----------------------------------------------------------------------------------------------');
+        console.log('');
+      })
+    );
   }
 
   // private showMessage(message: string, status: string) {

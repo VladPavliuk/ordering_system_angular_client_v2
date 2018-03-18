@@ -64,7 +64,7 @@ class UserApi implements StandardActions<User> {
     );
   }
 
-  organiztionsOwnerList(): Observable<Organization[]> {
+  organizationsOwnerList(): Observable<Organization[]> {
     return this.serverService.request({
       method: 'get',
       url: 'api/organizations/owner',
@@ -155,7 +155,7 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
-  isBelongToMe(id: number): Observable<any> {
+  isBelongToMe(id: number): Observable<boolean> {
     return this.serverService.request({
       method: 'get',
       auth: true,

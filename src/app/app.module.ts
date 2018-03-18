@@ -66,6 +66,10 @@ import {IndexComponent as UsersIndexComponent} from './components/users/index/in
 import {LoginComponent as UsersLoginComponent} from './components/users/login/login.component';
 import {RegisterComponent} from './components/users/register/register.component';
 import {OrganizationsComponent as UserOwnerOrganizationsComponent} from './components/users/dashboard/organizations/organizations.component';
+import {LoginComponent} from './components/admins/login/login.component';
+import {HomeComponent} from './components/admins/home/home.component';
+import {DashboardComponent} from './components/users/dashboard/dashboard.component';
+import {OrganizationsComponent} from './components/users/dashboard/organizations/organizations.component';
 //<
 
 //> Guards
@@ -73,11 +77,7 @@ import {UsersAuthGuard} from './guards/users-auth-guard';
 import {UsersGuestGuard} from './guards/users-guest-guard';
 import {AdminsAuthGuard} from './guards/admins-auth-guard';
 import {AdminsGuestGuard} from './guards/admins-guest-guard';
-import {LoginComponent} from './components/admins/login/login.component';
-import {HomeComponent} from './components/admins/home/home.component';
-import {DashboardComponent} from './components/users/dashboard/dashboard.component';
-import { OrganizationsComponent } from './components/users/dashboard/organizations/organizations.component';
-
+import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-to-user-guard';
 //<
 
 @NgModule({
@@ -148,7 +148,8 @@ import { OrganizationsComponent } from './components/users/dashboard/organizatio
     UsersAuthGuard,
     UsersGuestGuard,
     AdminsAuthGuard,
-    AdminsGuestGuard
+    AdminsGuestGuard,
+    IsOrganizationBelongToUserGuard
   ],
   bootstrap: [AppComponent]
 })

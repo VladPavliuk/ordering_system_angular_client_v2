@@ -2,6 +2,8 @@ import {Component, OnInit, DoCheck} from '@angular/core';
 import {Location} from '@angular/common';
 import {AdminsService} from '../../../services/admins/admins.service';
 import {AuthService} from '../../../services/auth/auth.service';
+import {ServerApiService} from '../../../services/server-api/server-api.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +16,9 @@ export class HeaderComponent implements OnInit, DoCheck {
   constructor(
     private location: Location,
     private authService: AuthService,
-    private adminService: AdminsService
+    private adminService: AdminsService,
+    private serverApiService: ServerApiService,
+    private router: Router
   ) {
   }
 
@@ -31,7 +35,8 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   logout(): void {
-    this.adminService.logout();
+    this.authService.deleteToken();
+    this.router.navigate(['/login']);
   }
 
 }

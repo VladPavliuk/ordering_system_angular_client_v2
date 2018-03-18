@@ -36,6 +36,7 @@ import {UsersAuthGuard} from './guards/users-auth-guard';
 import {UsersGuestGuard} from './guards/users-guest-guard';
 import {AdminsAuthGuard} from './guards/admins-auth-guard';
 import {AdminsGuestGuard} from './guards/admins-guest-guard';
+import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-to-user-guard';
 //<
 
 const routes: Routes = [
@@ -45,7 +46,7 @@ const routes: Routes = [
   {path: 'organizations-list', component: OrganizationsIndexComponent, canActivate: [UsersAuthGuard]},
   {path: 'organization-add', component: OrganizationAddComponent, canActivate: [UsersAuthGuard]},
   {path: 'organization/:id', component: OrganizationSingleComponent, canActivate: [UsersAuthGuard]},
-  {path: 'organization/:id/available-services', component: OrganizationAvailableServicesComponent},
+  {path: 'organization/:id/available-services', component: OrganizationAvailableServicesComponent, canActivate: [IsOrganizationBelongToUserGuard]},
 
   {path: 'services-list', component: ServicesIndexComponent, canActivate: [UsersAuthGuard]},
   {path: 'service-add', component: ServiceAddComponent, canActivate: [UsersAuthGuard]},
