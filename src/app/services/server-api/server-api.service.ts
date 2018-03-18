@@ -184,10 +184,12 @@ class ServiceApi implements StandardActions<Service> {
   ) {
   }
 
-  store(organization: Service): Observable<Service> {
+  store(service: Service): Observable<Service> {
     return this.serverService.request({
       method: 'post',
-      url: 'api/organizations'
+      auth: true,
+      url: 'api/services',
+      body: service
     });
   }
 

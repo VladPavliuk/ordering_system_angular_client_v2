@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ServicesService } from '../../../services/services/services.service';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ServicesService} from '../../../services/services/services.service';
+import {Location} from '@angular/common';
+import {ServerApiService} from '../../../services/server-api/server-api.service';
 
 @Component({
   selector: 'app-add',
@@ -8,14 +9,16 @@ import { Location } from '@angular/common';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  public  title: string;
-  public  price: number;
-  public  duration: number;
+  public title: string;
+  public price: number;
+  public duration: number;
 
   constructor(
-    private servicesService: ServicesService, 
-    private location: Location
-  ) { }
+    private servicesService: ServicesService,
+    private location: Location,
+    private serverApiService: ServerApiService
+  ) {
+  }
 
   ngOnInit() {
 
@@ -34,11 +37,13 @@ export class AddComponent implements OnInit {
   }
 
   create(): void {
-    this.servicesService.store({
+    this.serverApiService.serviceApi.store({
       title: this.title,
       price: this.price,
       duration: this.duration
-    }).subscribe(res => { this.location.back() });
+    }).subscribe(res => {
+      this.location.back();
+    });
   }
 
 }
