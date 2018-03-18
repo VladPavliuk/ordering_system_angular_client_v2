@@ -10,7 +10,7 @@ import {ServerApiService} from '../../../../services/server-api/server-api.servi
 export class OrganizationsComponent implements OnInit {
 
   public usersOrganizations: Organization[];
-  displayedColumns = ['title', 'actions'];
+  displayedColumns = ['avatar', 'title', 'actions'];
 
   constructor(
     private serverApiService: ServerApiService

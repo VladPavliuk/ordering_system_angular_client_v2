@@ -135,6 +135,16 @@ class OrganizationApi implements StandardActions<Organization> {
   ) {
   }
 
+  setAvatar(id: number, image: any): Observable<any> {
+    return this.serverService.request({
+      method: 'post',
+      auth: true,
+      body: image,
+      disableJsonHead: true,
+      url: 'api/organizations/' + id + '/set-avatar'
+    });
+  }
+
   store(organization: Organization): Observable<Organization> {
     return this.serverService.request({
       method: 'post',

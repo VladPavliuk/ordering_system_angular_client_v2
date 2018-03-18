@@ -1,50 +1,80 @@
 <mat-card *ngIf="organization">
-  <mat-card-title>
-    Organization: <b>{{ organization.title }}</b>
-  </mat-card-title>
-  <mat-card-content>
-    <mat-table *ngIf="services && services.length > 0" #table [dataSource]="services">
-        <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-          <mat-cell *matCellDef="let service"> {{service.service_ID.id}} </mat-cell>
-        </ng-container>
-        
-        <ng-container matColumnDef="title">
-          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-          <mat-cell *matCellDef="let service"> {{service.service_ID.title}} </mat-cell>
-        </ng-container>
+    <mat-card-title>
+        Organization: <b>{{ organization.title }}</b>
+    </mat-card-title>
+    <mat-card-content>
+        <div *ngIf="organization.imagePath"
+             (mouseenter)="onAvatarMouseOver()"
+             (mouseleave)="onAvatarMouseOut()">
+            <div class="organization-image-wrapper">
+                <img *ngIf="organization.imagePath"
+                     [src]="'http://localhost:5000/' + organization.imagePath"
+                     alt="Profile image"
+                     title="Profile image">
+                <button *ngIf="showUploadAvatarButton"
+                        (click)="onSetAvatarClick()"
+                        class="upload-avatar-button">
+                    Update
+                </button>
+            </div>
+        </div>
+        <div *ngIf="!organization.imagePath">
+            <button (click)="onSetAvatarClick()"
+                    mat-raised-button color="accent">
+                Set organization avatar
+            </button>
+        </div>
 
-        <ng-container matColumnDef="price">
-            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-            <mat-cell *matCellDef="let service">$ {{service.service_ID.price}} </mat-cell>
-          </ng-container>
+        <input type="file"
+               #avatar_input
+               (change)="onAvatarSelect($event)"
+               style="display: none;">
+        <mat-table *ngIf="services && services.length > 0" #table [dataSource]="services">
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+                <mat-cell *matCellDef="let service"> {{service.service_ID.id}}</mat-cell>
+            </ng-container>
 
-        <ng-container matColumnDef="duration">
-          <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
-          <mat-cell *matCellDef="let service"> {{service.service_ID.duration}} min.</mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let service">
-            <button *ngIf="isOrganizationBelongToMe" mat-button  mat-raised-button color="primary" routerLink="/service/{{service.service_ID.id}}">View</button>
-            <button *ngIf="isOrganizationBelongToMe" mat-button  mat-raised-button color="warn" (click)="unpinService(service.service_ID.id)">Unpin</button>
-          </mat-cell>
-        </ng-container>  
-    
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-  </mat-card-content>
-  <mat-card-actions *ngIf="isOrganizationBelongToMe">
-    <button mat-raised-button color="accent"  
-            routerLink="/organization/{{organization.id}}/available-services">
-      Pin service
-    </button>
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef> Title</mat-header-cell>
+                <mat-cell *matCellDef="let service"> {{service.service_ID.title}}</mat-cell>
+            </ng-container>
 
-    <button mat-raised-button color="warn" 
-            (click)="delete()">
-      Delete organization
-    </button>
-  </mat-card-actions>
+            <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef> Price</mat-header-cell>
+                <mat-cell *matCellDef="let service">$ {{service.service_ID.price}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef> Duration</mat-header-cell>
+                <mat-cell *matCellDef="let service"> {{service.service_ID.duration}} min.</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let service">
+                    <button *ngIf="isOrganizationBelongToMe" mat-button mat-raised-button color="primary"
+                            routerLink="/service/{{service.service_ID.id}}">View
+                    </button>
+                    <button *ngIf="isOrganizationBelongToMe" mat-button mat-raised-button color="warn"
+                            (click)="unpinService(service.service_ID.id)">Unpin
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </mat-card-content>
+    <mat-card-actions *ngIf="isOrganizationBelongToMe">
+        <button mat-raised-button color="accent"
+                routerLink="/organization/{{organization.id}}/available-services">
+            Pin service
+        </button>
+
+        <button mat-raised-button color="warn"
+                (click)="delete()">
+            Delete organization
+        </button>
+    </mat-card-actions>
 </mat-card>

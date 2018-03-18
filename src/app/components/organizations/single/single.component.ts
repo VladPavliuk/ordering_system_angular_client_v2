@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {OrganizationsService} from '../../../services/organizations/organizations.service';
 import {Organization} from '../../../essences/Organization';
@@ -17,7 +17,10 @@ export class SingleComponent implements OnInit {
   public organization: Organization;
   public isOrganizationBelongToMe = false;
   public services: Service[];
-  displayedColumns = ['id', 'title', 'price', 'duration', 'actions'];
+  public displayedColumns = ['id', 'title', 'price', 'duration', 'actions'];
+  public showUploadAvatarButton = false;
+  public selectedAvatar: { file: any,  title: string } = { file: '', title: ''};
+  @ViewChild('avatar_input') avatarInput;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +36,31 @@ export class SingleComponent implements OnInit {
     this.getOrganization(id);
     this.checkIsOrganizationBelongToMe(id);
     this.getServicesList(id);
+  }
+
+  onAvatarMouseOver() {
+    this.showUploadAvatarButton = true;
+  }
+
+  onAvatarMouseOut() {
+    this.showUploadAvatarButton = false;
+  }
+
+  onSetAvatarClick() {
+    this.avatarInput.nativeElement.click();
+  }
+
+  onAvatarSelect(event: any) {
+    this.selectedAvatar.file = event.target.files[0];
+    this.selectedAvatar.title = event.target.files[0].name;
+
+    const formData = new FormData();
+    formData.append('image', this.selectedAvatar.file);
+
+    this.serverApiService.organizationApi.setAvatar(this.organization.id, formData)
+      .subscribe(res => {
+        this.getOrganization(this.organization.id);
+      });
   }
 
   getOrganization(id: number) {

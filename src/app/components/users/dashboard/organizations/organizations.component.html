@@ -1,6 +1,17 @@
 <div>
   <h4>Your organizations</h4>
   <mat-table #table [dataSource]="usersOrganizations">
+    <ng-container matColumnDef="avatar">
+    <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+    <mat-cell *matCellDef="let organization">
+      <img *ngIf="organization.imagePath"
+           [src]="'http://localhost:5000/' + organization.imagePath"
+           class="organization-avatar"
+           alt="Avatar">
+      <mat-icon *ngIf="!organization.imagePath">businesses</mat-icon>
+    </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
       <mat-cell *matCellDef="let organization"> {{organization.title}} </mat-cell>
