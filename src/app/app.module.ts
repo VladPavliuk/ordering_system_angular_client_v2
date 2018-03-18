@@ -69,6 +69,7 @@ import {RegisterComponent} from './components/users/register/register.component'
 
 //> Guards
 import {UsersAuthGuard} from './guards/users-auth-guard';
+import {UsersGuestGuard} from './guards/users-guest-guard';
 import {AdminsAuthGuard} from './guards/admins-auth-guard';
 import {AdminsGuestGuard} from './guards/admins-guest-guard';
 import {LoginComponent} from './components/admins/login/login.component';
@@ -141,6 +142,7 @@ import {DashboardComponent} from './components/users/dashboard/dashboard.compone
     FormBuilder,
     CookieService,
     UsersAuthGuard,
+    UsersGuestGuard,
     AdminsAuthGuard,
     AdminsGuestGuard
   ],

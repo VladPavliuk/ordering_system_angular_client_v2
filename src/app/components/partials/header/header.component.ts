@@ -1,6 +1,7 @@
 import {Component, OnInit, DoCheck} from '@angular/core';
 import {Location} from '@angular/common';
 import {AdminsService} from '../../../services/admins/admins.service';
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,26 +10,27 @@ import {AdminsService} from '../../../services/admins/admins.service';
 })
 export class HeaderComponent implements OnInit, DoCheck {
 
-  public isAuthorized: boolean = false;
+  public isAuthorized = false;
   constructor(
     private location: Location,
+    private authService: AuthService,
     private adminService: AdminsService
   ) {
   }
 
   ngDoCheck() {
-    this.isAuthorized = this.adminService.isAuthorized();
+    this.isAuthorized = this.authService.isAuthorized();
   }
 
   ngOnInit() {
-    this.isAuthorized = this.adminService.isAuthorized();
+    this.isAuthorized = this.authService.isAuthorized();
   }
 
   toPrevPage(): void {
     this.location.back();
   }
 
-  adminLogout(): void {
+  logout(): void {
     this.adminService.logout();
   }
 

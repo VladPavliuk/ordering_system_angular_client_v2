@@ -1,46 +1,49 @@
 <mat-toolbar class="header-wrapper" color="primary">
-  
-  <button color="accent" mat-mini-fab (click)="toPrevPage()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
 
-  <span class="brand-icon" routerLink="/organizations-list">Services ordering system</span>
-  
-  <span class="example-fill-remaining-space"></span>
+    <button color="accent" mat-mini-fab (click)="toPrevPage()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
 
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button routerLink="/login" mat-menu-item>
-      <span>Login</span>
+    <span class="brand-icon" routerLink="/organizations-list">Services ordering system</span>
+
+    <span class="example-fill-remaining-space"></span>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
     </button>
-    <button routerLink="/login" mat-menu-item>
-      <span>Sign up</span>
-    </button>
-    <button routerLink="/order" mat-menu-item>
-      <mat-icon>add_shopping_cart</mat-icon>
-      <span>Make order</span>
-    </button>
-    <button *ngIf="isAuthorized" routerLink="/orders" mat-menu-item>
-      <mat-icon>list</mat-icon>
-      <span>Orders</span>
-    </button>
-    <button *ngIf="isAuthorized" routerLink="/users" mat-menu-item>
-      <mat-icon>perm_contact_calendar</mat-icon>
-      <span>Users</span>
-    </button>
-    <button *ngIf="isAuthorized" routerLink="/services-list" mat-menu-item>
-      <mat-icon>room_service</mat-icon>
-      <span>Services</span>
-    </button> 
-    <button *ngIf="isAuthorized" routerLink="/organizations-list" mat-menu-item>
-      <mat-icon>account_balance</mat-icon>
-      <span>Organization</span>
-    </button>
-    <button *ngIf="isAuthorized" (click)="adminLogout()" mat-menu-item>
-      <mat-icon>keyboard_backspace</mat-icon>
-      <span>Logout as admin</span>
-    </button>
-  </mat-menu>
+    <mat-menu #menu="matMenu">
+        <button *ngIf="!isAuthorized" routerLink="/login" mat-menu-item>
+            <span>Login</span>
+        </button>
+        <button *ngIf="!isAuthorized" routerLink="/login" mat-menu-item>
+            <span>Sign up</span>
+        </button>
+        <button *ngIf="isAuthorized" routerLink="/home" mat-menu-item>
+            <span>Dashboard</span>
+        </button>
+        <button routerLink="/order" mat-menu-item>
+            <mat-icon>add_shopping_cart</mat-icon>
+            <span>Make order</span>
+        </button>
+        <button *ngIf="isAuthorized" routerLink="/orders" mat-menu-item>
+            <mat-icon>list</mat-icon>
+            <span>Orders</span>
+        </button>
+        <button *ngIf="isAuthorized" routerLink="/users" mat-menu-item>
+            <mat-icon>perm_contact_calendar</mat-icon>
+            <span>Users</span>
+        </button>
+        <button *ngIf="isAuthorized" routerLink="/services-list" mat-menu-item>
+            <mat-icon>room_service</mat-icon>
+            <span>Services</span>
+        </button>
+        <button *ngIf="isAuthorized" routerLink="/organizations-list" mat-menu-item>
+            <mat-icon>account_balance</mat-icon>
+            <span>Organization</span>
+        </button>
+        <button *ngIf="isAuthorized" (click)="logout()" mat-menu-item>
+            <mat-icon>keyboard_backspace</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-menu>
 </mat-toolbar>

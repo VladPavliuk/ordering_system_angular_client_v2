@@ -5,7 +5,7 @@ import {AuthService} from '../services/auth/auth.service';
 import {Router} from '@angular/router';
 
 @Injectable()
-export class UsersAuthGuard implements CanActivate {
+export class UsersGuestGuard implements CanActivate {
   constructor(
     private cookieService: CookieService,
     private authService: AuthService,
@@ -14,8 +14,8 @@ export class UsersAuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (!this.authService.isAuthorized()) {
-      this.router.navigate(['/login']);
+    if (this.authService.isAuthorized()) {
+      this.router.navigate(['/home']);
       return false;
     }
 

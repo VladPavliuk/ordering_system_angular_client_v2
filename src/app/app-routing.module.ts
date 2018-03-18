@@ -33,6 +33,7 @@ import {HomeComponent as AdminHomeComponent} from './components/admins/home/home
 
 //> Guards
 import {UsersAuthGuard} from './guards/users-auth-guard';
+import {UsersGuestGuard} from './guards/users-guest-guard';
 import {AdminsAuthGuard} from './guards/admins-auth-guard';
 import {AdminsGuestGuard} from './guards/admins-guest-guard';
 //<
@@ -55,7 +56,7 @@ const routes: Routes = [
 
   {path: 'home', component: UsersDashboardComponent, canActivate: [UsersAuthGuard]},
   {path: 'users', component: UsersIndexComponent, canActivate: [AdminsAuthGuard]},
-  {path: 'login', component: UsersLoginComponent},
+  {path: 'login', component: UsersLoginComponent, canActivate: [UsersGuestGuard]},
 
   {path: 'admin/login', component: AdminLoginComponent, canActivate: [AdminsGuestGuard]},
   {path: 'admin/home', component: AdminHomeComponent, canActivate: [AdminsAuthGuard]},
