@@ -64,6 +64,24 @@ class UserApi implements StandardActions<User> {
     );
   }
 
+  getUserInfo(): Observable<User> {
+    return this.serverService.request({
+      method: 'get',
+      auth: true,
+      url: 'api/manage/user'
+    });
+  }
+
+  setAvatar(image: any): Observable<any> {
+    return this.serverService.request({
+      method: 'post',
+      auth: true,
+      body: image,
+      disableJsonHead: true,
+      url: 'api/manage/set-avatar'
+    });
+  }
+
   organizationsOwnerList(): Observable<Organization[]> {
     return this.serverService.request({
       method: 'get',

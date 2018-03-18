@@ -55,7 +55,9 @@ export class ServerService {
     if (!requestParams.headers) {
       requestParams.headers = {};
     }
-    requestParams.headers['Content-Type'] = 'application/json';
+    if (!requestParams.disableJsonHead) {
+      requestParams.headers['Content-Type'] = 'application/json';
+    }
     return requestParams;
   }
 

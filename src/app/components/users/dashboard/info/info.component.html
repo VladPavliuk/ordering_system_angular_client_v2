@@ -1,0 +1,26 @@
+<div *ngIf="user" class="user-wrapper">
+    <table>
+        <tr>
+            <td>
+                <div class="user-image-wrapper">
+                    <img *ngIf="user.imagePath"
+                         [src]="'http://localhost:5000/' + user.imagePath"
+                         alt="Profile image"
+                         title="Profile image">
+                </div>
+            </td>
+            <td>
+                <div class="user-info-wrapper">
+                    <ul>
+                        <li><b>Name:</b> {{ user.userName }}</li>
+                        <li><b>Name:</b> {{ user.userName }}</li>
+                        <li><b>Name:</b> {{ user.userName }}</li>
+                    </ul>
+
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <input type="file" (change)="onAvatarSelect($event)" value="Upload photo">
+</div>
