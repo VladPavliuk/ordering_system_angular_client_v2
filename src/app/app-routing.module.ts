@@ -43,7 +43,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/order', pathMatch: 'full'},
 
   {path: 'organizations-list', component: OrganizationsIndexComponent, canActivate: [AdminsAuthGuard]},
-  {path: 'organization-add', component: OrganizationAddComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'organization-add', component: OrganizationAddComponent, canActivate: [UsersAuthGuard]},
   {path: 'organization/:id', component: OrganizationSingleComponent, canActivate: [AdminsAuthGuard]},
   {path: 'organization/:id/available-services', component: OrganizationAvailableServicesComponent},
 

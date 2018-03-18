@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {RequestStructure} from '../../essences/RequestStructure';
 import {AuthService} from '../../services/auth/auth.service';
 import {HttpHeaders} from '@angular/common/http/src/headers';
+import {SnackBarService} from '../snack-bar/snack-bar.service';
 
 @Injectable()
 export class ServerService {
@@ -13,7 +14,8 @@ export class ServerService {
 
   constructor(
     private httpDriver: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBarService: SnackBarService
   ) {
     this.apiDomain = 'http://localhost:5000/';
     this.AUTH_TOKEN_HEADER_KEY = 'Authorization';
@@ -29,6 +31,16 @@ export class ServerService {
       body: requestParams.body
     });
   }
+
+  // private showMessage(message: string, status: string) {
+  //   this.snackBarService.show({
+  //     data: {
+  //       message: message,
+  //     },
+  //     panelClass: status,
+  //     duration: 10000
+  //   });
+  // }
 
   private defineHeaders(requestParams: RequestStructure): RequestStructure {
     if (!requestParams.headers) {

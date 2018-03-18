@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { OrganizationsService } from '../../../services/organizations/organizations.service';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ServerApiService} from '../../../services/server-api/server-api.service';
+import {Location} from '@angular/common';
+import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 
 @Component({
   selector: 'app-add',
@@ -11,9 +12,11 @@ export class AddComponent implements OnInit {
   public title: string;
 
   constructor(
-    private organizationsService: OrganizationsService, 
-    private location: Location
-  ) { }
+    private serverApiService: ServerApiService,
+    private location: Location,
+    private snackBarService: SnackBarService,
+  ) {
+  }
 
   ngOnInit() {
   }
@@ -23,8 +26,19 @@ export class AddComponent implements OnInit {
   }
 
   create(): void {
-    this.organizationsService.store({
-      title: this.title
-    }).subscribe(res => { this.location.back() });
+    this.serverApiService
+      .organizationApi
+      .store({
+        title: this.title
+      }).subscribe(res => {
+      this.snackBarService.show({
+        data: {
+          message: 'Organization created!',
+        },
+        panelClass: 'success',
+        duration: 1000
+      });
+      this.location.back();
+    });
   }
 }

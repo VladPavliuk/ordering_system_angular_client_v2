@@ -64,6 +64,14 @@ class UserApi implements StandardActions<User> {
     );
   }
 
+  organiztionsOwnerList(): Observable<Organization[]> {
+    return this.serverService.request({
+      method: 'get',
+      url: 'api/organizations/owner',
+      auth: true
+    });
+  }
+
   store(organization: User): Observable<User> {
     return this.serverService.request({
       method: 'post',
@@ -112,7 +120,9 @@ class OrganizationApi implements StandardActions<Organization> {
   store(organization: Organization): Observable<Organization> {
     return this.serverService.request({
       method: 'post',
-      url: 'api/organizations'
+      url: 'api/organizations',
+      body: organization,
+      auth: true
     });
   }
 

@@ -65,6 +65,7 @@ import {IndexComponent  as OrdersIndexComponent} from './components/order/index/
 import {IndexComponent as UsersIndexComponent} from './components/users/index/index.component';
 import {LoginComponent as UsersLoginComponent} from './components/users/login/login.component';
 import {RegisterComponent} from './components/users/register/register.component';
+import {OrganizationsComponent as UserOwnerOrganizationsComponent} from './components/users/dashboard/organizations/organizations.component';
 //<
 
 //> Guards
@@ -75,6 +76,7 @@ import {AdminsGuestGuard} from './guards/admins-guest-guard';
 import {LoginComponent} from './components/admins/login/login.component';
 import {HomeComponent} from './components/admins/home/home.component';
 import {DashboardComponent} from './components/users/dashboard/dashboard.component';
+import { OrganizationsComponent } from './components/users/dashboard/organizations/organizations.component';
 
 //<
 
@@ -99,7 +101,9 @@ import {DashboardComponent} from './components/users/dashboard/dashboard.compone
     LoginComponent,
     HomeComponent,
     DashboardComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    OrganizationsComponent,
+    UserOwnerOrganizationsComponent
   ],
   entryComponents: [
     SnackBarComponent
