@@ -23,7 +23,7 @@ import {IndexComponent as OrdersIndexComponent} from './components/order/index/i
 //> Users
 import {IndexComponent as UsersIndexComponent} from './components/users/index/index.component';
 import {LoginComponent as UsersLoginComponent} from './components/users/login/login.component';
-import {DashboardComponent as UsersDashboardComponent } from './components/users/dashboard/dashboard.component';
+import {DashboardComponent as UsersDashboardComponent} from './components/users/dashboard/dashboard.component';
 //<
 
 //>Admins
@@ -42,24 +42,24 @@ const routes: Routes = [
 
   {path: '', redirectTo: '/order', pathMatch: 'full'},
 
-  {path: 'organizations-list', component: OrganizationsIndexComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'organizations-list', component: OrganizationsIndexComponent, canActivate: [UsersAuthGuard]},
   {path: 'organization-add', component: OrganizationAddComponent, canActivate: [UsersAuthGuard]},
-  {path: 'organization/:id', component: OrganizationSingleComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'organization/:id', component: OrganizationSingleComponent, canActivate: [UsersAuthGuard]},
   {path: 'organization/:id/available-services', component: OrganizationAvailableServicesComponent},
 
-  {path: 'services-list', component: ServicesIndexComponent, canActivate: [AdminsAuthGuard]},
-  {path: 'service-add', component: ServiceAddComponent, canActivate: [AdminsAuthGuard]},
-  {path: 'service/:id', component: ServiceSingleComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'services-list', component: ServicesIndexComponent, canActivate: [UsersAuthGuard]},
+  {path: 'service-add', component: ServiceAddComponent, canActivate: [UsersAuthGuard]},
+  {path: 'service/:id', component: ServiceSingleComponent, canActivate: [UsersAuthGuard]},
 
   {path: 'order', component: CreateOrderComponent},
-  {path: 'orders', component: OrdersIndexComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'orders', component: OrdersIndexComponent, canActivate: [UsersAuthGuard]},
 
   {path: 'home', component: UsersDashboardComponent, canActivate: [UsersAuthGuard]},
-  {path: 'users', component: UsersIndexComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'users', component: UsersIndexComponent, canActivate: [UsersAuthGuard]},
   {path: 'login', component: UsersLoginComponent, canActivate: [UsersGuestGuard]},
 
   {path: 'admin/login', component: AdminLoginComponent, canActivate: [AdminsGuestGuard]},
-  {path: 'admin/home', component: AdminHomeComponent, canActivate: [AdminsAuthGuard]},
+  {path: 'admin/home', component: AdminHomeComponent, canActivate: [UsersAuthGuard]},
 
 ];
 

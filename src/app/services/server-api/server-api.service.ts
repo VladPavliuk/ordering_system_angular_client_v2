@@ -140,6 +140,29 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
+  servicesList(id: number): Observable<Service[]> {
+    return this.serverService.request({
+      method: 'get',
+      url: 'api/organizations/' + id + '/services-list'
+    });
+  }
+
+  unpinService(organizationId: number, serviceId: number): Observable<any> {
+    return this.serverService.request({
+      method: 'delete',
+      auth: true,
+      url: '/organizations/unpin-service/' + organizationId + '/' + serviceId
+    });
+  }
+
+  isBelongToMe(id: number): Observable<any> {
+    return this.serverService.request({
+      method: 'get',
+      auth: true,
+      url: 'api/organizations/' + id + '/is-belong-to-me'
+    });
+  }
+
   update(id: number, organization: Organization): Observable<Organization> {
     return this.serverService.request({
       method: 'put',
