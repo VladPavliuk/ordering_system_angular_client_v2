@@ -36,14 +36,14 @@ export class SingleComponent implements OnInit {
 
   getOrganization(id: number) {
     this.serverApiService.serviceApi.show(id)
-      .subscribe(res => {
+      .then(res => {
         this.service = res;
       });
   }
 
   delete() {
     this.serverApiService.serviceApi.destroy(this.service.id)
-      .subscribe(res => { this.location.back(); });
+      .then(res => { this.location.back(); });
   }
 
 }

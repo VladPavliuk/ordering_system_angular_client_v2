@@ -30,7 +30,7 @@ export class AddComponent implements OnInit {
       .organizationApi
       .store({
         title: this.title
-      }).subscribe(res => {
+      }).then(res => {
       this.snackBarService.show({
         data: {
           message: 'Organization created!',

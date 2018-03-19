@@ -23,7 +23,7 @@ export class OrdersComponent implements OnInit {
 
   getUsersOrders(): void {
     this.serverApiService.orderApi.getAuthUserOrders()
-      .subscribe(res => {
+      .then(res => {
         this.usersOrders = res;
       });
   }

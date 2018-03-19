@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.serverApiService.userApi.login(this.email, this.password)
-      .subscribe(res => {
+      .then(res => {
         this.snackBarService.show({
           data: {
             message: 'Success login!',

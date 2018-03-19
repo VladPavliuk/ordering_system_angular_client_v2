@@ -17,7 +17,7 @@ export class IsOrganizationBelongToUserGuard implements CanActivate {
   ) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     const id = +route.url[1].path;
     return this.serverApiService.organizationApi.isBelongToMe(id);
   }

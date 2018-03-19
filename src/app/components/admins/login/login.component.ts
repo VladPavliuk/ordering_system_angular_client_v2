@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.serverApiService.organizationApi.index()
-      .subscribe(res => {
+      .then(res => {
         console.log(res);
       });
   }
@@ -39,6 +39,6 @@ export class LoginComponent implements OnInit {
     this.adminsService.login({
       phone: this.phone,
       password: this.password
-    }).subscribe(res => this.router.navigate(['admin/home']));
+    }).then(res => this.router.navigate(['admin/home']));
   }
 }

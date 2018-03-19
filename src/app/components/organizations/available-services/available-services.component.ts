@@ -39,14 +39,14 @@ export class AvailableServicesComponent implements OnInit {
 
   getAvailableServices(id: number): void {
     this.serverApiService.organizationApi.availableService(id)
-      .subscribe(res => {
+      .then(res => {
         this.availableServices = res;
       });
   }
 
   pinService(serviceId: number): void {
     this.serverApiService.organizationApi.pinService(this.organizationId, serviceId)
-      .subscribe(res => {
+      .then(res => {
         this.snackBarService.show({
           data: {
             message: `Service pined`,

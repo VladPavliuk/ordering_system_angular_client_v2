@@ -27,15 +27,15 @@ export class ServerApiService {
 }
 
 interface StandardActions<T> {
-  store(instance: T): Observable<T>;
+  store(instance: T): Promise<T>;
 
-  index(): Observable<T[]>;
+  index(): Promise<T[]>;
 
-  show(id: number): Observable<T>;
+  show(id: number): Promise<T>;
 
-  update(id: number, instance: T): Observable<T>;
+  update(id: number, instance: T): Promise<T>;
 
-  destroy(id: number): Observable<any>;
+  destroy(id: number): Promise<any>;
 }
 
 // class AdminApi implements StandardActions {
@@ -48,7 +48,7 @@ class OrderApi {
   ) {
   }
 
-  store(order: any): Observable<any> {
+  store(order: any): Promise<any> {
     return this.serverService.request({
       method: 'post',
       auth: true,
@@ -57,7 +57,7 @@ class OrderApi {
     });
   }
 
-  public getAuthUserOrders(): Observable<any> {
+  public getAuthUserOrders(): Promise<any> {
     return this.serverService.request({
       method: 'get',
       auth: true,
@@ -74,7 +74,7 @@ class UserApi implements StandardActions<User> {
   ) {
   }
 
-  login(userName: string, password: string): Observable<any> {
+  login(userName: string, password: string): Promise<any> {
     return this.serverService.request({
       method: 'post',
       body: {
@@ -82,17 +82,15 @@ class UserApi implements StandardActions<User> {
         password: password
       },
       url: 'api/auth/login'
-    }).pipe(
-      tap(res => {
-        if (res['auth_token']) {
-          this.authService.setToken(res['auth_token']);
-          this.authService.setIsAdmin(res['is_admin']);
-        }
-      })
-    );
+    }).then(res => {
+      if (res['auth_token']) {
+        this.authService.setToken(res['auth_token']);
+        this.authService.setIsAdmin(res['is_admin']);
+      }
+    });
   }
 
-  getUserInfo(): Observable<User> {
+  getUserInfo(): Promise<User> {
     return this.serverService.request({
       method: 'get',
       auth: true,
@@ -100,7 +98,7 @@ class UserApi implements StandardActions<User> {
     });
   }
 
-  setAvatar(image: any): Observable<any> {
+  setAvatar(image: any): Promise<any> {
     return this.serverService.request({
       method: 'post',
       auth: true,
@@ -110,7 +108,7 @@ class UserApi implements StandardActions<User> {
     });
   }
 
-  organizationsOwnerList(): Observable<Organization[]> {
+  organizationsOwnerList(): Promise<Organization[]> {
     return this.serverService.request({
       method: 'get',
       url: 'api/organizations/owner',
@@ -118,35 +116,35 @@ class UserApi implements StandardActions<User> {
     });
   }
 
-  store(organization: User): Observable<User> {
+  store(instance: User): Promise<User> {
     return this.serverService.request({
       method: 'post',
       url: 'api/organizations'
     });
   }
 
-  index(): Observable<User[]> {
+  index(): Promise<User[]> {
     return this.serverService.request({
       method: 'get',
       url: 'api/organizations'
     });
   }
 
-  show(id: number): Observable<User> {
+  show(id: number): Promise<User> {
     return this.serverService.request({
       method: 'get',
       url: 'api/organizations/' + id
     });
   }
 
-  update(id: number, organization: User): Observable<User> {
+  update(id: number, instance: User): Promise<User> {
     return this.serverService.request({
       method: 'put',
       url: 'api/organizations/' + id
     });
   }
 
-  destroy(id: number): Observable<any> {
+  destroy(id: number): Promise<any> {
     return this.serverService.request({
       method: 'delete',
       url: 'api/organizations/' + id
@@ -163,7 +161,7 @@ class OrganizationApi implements StandardActions<Organization> {
   ) {
   }
 
-  setAvatar(id: number, image: any): Observable<any> {
+  setAvatar(id: number, image: any): Promise<any> {
     return this.serverService.request({
       method: 'post',
       auth: true,
@@ -173,37 +171,37 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
-  store(organization: Organization): Observable<Organization> {
+  store(instance: Organization): Promise<Organization> {
     return this.serverService.request({
       method: 'post',
       url: 'api/organizations',
-      body: organization,
+      body: instance,
       auth: true
     });
   }
 
-  index(): Observable<Organization[]> {
+  index(): Promise<Organization[]> {
     return this.serverService.request({
       method: 'get',
       url: 'api/organizations'
     });
   }
 
-  show(id: number): Observable<Organization> {
+  show(id: number): Promise<Organization> {
     return this.serverService.request({
       method: 'get',
       url: 'api/organizations/' + id
     });
   }
 
-  servicesList(id: number): Observable<Service[]> {
+  servicesList(id: number): Promise<Service[]> {
     return this.serverService.request({
       method: 'get',
       url: 'api/organizations/' + id + '/services-list'
     });
   }
 
-  availableService(id: number): Observable<Service[]> {
+  availableService(id: number): Promise<Service[]> {
     return this.serverService.request({
       method: 'get',
       auth: true,
@@ -219,7 +217,7 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
-  unpinService(organizationId: number, serviceId: number): Observable<any> {
+  unpinService(organizationId: number, serviceId: number): Promise<any> {
     return this.serverService.request({
       method: 'delete',
       auth: true,
@@ -227,7 +225,7 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
-  isBelongToMe(id: number): Observable<boolean> {
+  isBelongToMe(id: number): Promise<boolean> {
     return this.serverService.request({
       method: 'get',
       auth: true,
@@ -235,14 +233,14 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
-  update(id: number, organization: Organization): Observable<Organization> {
+  update(id: number, instance: Organization): Promise<Organization> {
     return this.serverService.request({
       method: 'put',
       url: 'api/organizations/' + id
     });
   }
 
-  destroy(id: number): Observable<any> {
+  destroy(id: number): Promise<any> {
     return this.serverService.request({
       method: 'delete',
       url: 'api/organizations/' + id
@@ -256,37 +254,37 @@ class ServiceApi implements StandardActions<Service> {
   ) {
   }
 
-  store(service: Service): Observable<Service> {
+  store(instance: Service): Promise<Service> {
     return this.serverService.request({
       method: 'post',
       auth: true,
       url: 'api/services',
-      body: service
+      body: instance
     });
   }
 
-  organizationsList(id: number): Observable<Organization[]> {
+  organizationsList(id: number): Promise<Organization[]> {
     return this.serverService.request({
       method: 'get',
       url: 'api/services/' + id + '/organizations'
     });
   }
 
-  index(): Observable<Service[]> {
+  index(): Promise<Service[]> {
     return this.serverService.request({
       method: 'get',
       url: 'api/services'
     });
   }
 
-  show(id: number): Observable<Service> {
+  show(id: number): Promise<Service> {
     return this.serverService.request({
       method: 'get',
       url: 'api/services/' + id
     });
   }
 
-  update(id: number, organization: Service): Observable<Service> {
+  update(id: number, instance: Service): Promise<Service> {
     return this.serverService.request({
       method: 'put',
       auth: true,
@@ -294,7 +292,7 @@ class ServiceApi implements StandardActions<Service> {
     });
   }
 
-  destroy(id: number): Observable<any> {
+  destroy(id: number): Promise<any> {
     return this.serverService.request({
       method: 'delete',
       auth: true,

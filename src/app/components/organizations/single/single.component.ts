@@ -58,7 +58,7 @@ export class SingleComponent implements OnInit {
     formData.append('image', this.selectedAvatar.file);
 
     this.serverApiService.organizationApi.setAvatar(this.organization.id, formData)
-      .subscribe(res => {
+      .then(res => {
         this.getOrganization(this.organization.id);
         this.snackBarService.show({
           data: {
@@ -72,28 +72,28 @@ export class SingleComponent implements OnInit {
 
   getOrganization(id: number) {
     this.serverApiService.organizationApi.show(id)
-      .subscribe(res => {
+      .then(res => {
         this.organization = res;
       });
   }
 
   checkIsOrganizationBelongToMe(id: number) {
     return this.serverApiService.organizationApi.isBelongToMe(id)
-      .subscribe(res => {
+      .then(res => {
         this.isOrganizationBelongToMe = res;
       });
   }
 
   getServicesList(id: number) {
     this.serverApiService.organizationApi.servicesList(id)
-      .subscribe(res => {
+      .then(res => {
         this.services = res;
       });
   }
 
   delete() {
     this.serverApiService.organizationApi.destroy(this.organization.id)
-      .subscribe(res => {
+      .then(res => {
         this.location.back();
         this.snackBarService.show({
           data: {
@@ -107,7 +107,7 @@ export class SingleComponent implements OnInit {
 
   unpinService(serviceId: number) {
     this.serverApiService.organizationApi.unpinService(this.organization.id, serviceId)
-      .subscribe(res => {
+      .then(res => {
         this.getServicesList(this.organization.id);
         this.snackBarService.show({
           data: {

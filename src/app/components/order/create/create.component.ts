@@ -46,14 +46,14 @@ export class CreateComponent implements OnInit {
 
   getOrganizations(): void {
     this.serverApiService.organizationApi.index()
-      .subscribe(res => {
+      .then(res => {
         this.organizations = res;
       });
   }
 
   getServices(): void {
     this.serverApiService.serviceApi.index()
-      .subscribe(res => {
+      .then(res => {
         this.services = res;
       });
   }
@@ -68,7 +68,7 @@ export class CreateComponent implements OnInit {
       Price: this.selectedService.price,
       Duration: this.selectedService.duration,
       StartedAt: moment(this.startingDate).format('YYYY-MM-DDTHH:mm:ss')
-    }).subscribe(res => {
+    }).then(res => {
       this.location.back();
     });
   }
@@ -88,7 +88,7 @@ export class CreateComponent implements OnInit {
   onServiceSelect(service: Service) {
     this.selectedService = service;
     this.serverApiService.serviceApi.organizationsList(service.id)
-      .subscribe(res => {
+      .then(res => {
         this.organizations = res;
       });
   }

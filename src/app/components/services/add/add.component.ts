@@ -41,7 +41,7 @@ export class AddComponent implements OnInit {
       title: this.title,
       price: this.price,
       duration: this.duration
-    }).subscribe(res => {
+    }).then(res => {
       this.location.back();
     });
   }

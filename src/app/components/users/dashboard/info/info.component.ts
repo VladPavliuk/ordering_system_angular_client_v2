@@ -25,7 +25,7 @@ export class InfoComponent implements OnInit {
 
   getUserInfo() {
     this.serverApiService.userApi.getUserInfo()
-      .subscribe(res => {
+      .then(res => {
         this.user = res;
       });
   }
@@ -50,7 +50,7 @@ export class InfoComponent implements OnInit {
     formData.append('image', this.selectedAvatar.file);
 
     this.serverApiService.userApi.setAvatar(formData)
-      .subscribe(res => {
+      .then(res => {
         this.getUserInfo();
         this.snackBarService.show({
           data: {

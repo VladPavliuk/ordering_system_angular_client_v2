@@ -22,7 +22,7 @@ export class ServerService {
     this.AUTH_TOKEN_HEADER_KEY = 'Authorization';
   }
 
-  public request(requestParams: RequestStructure): Observable<any> {
+  public request(requestParams: RequestStructure): Promise<any> {
     requestParams = this.defineHeaders(requestParams);
     requestParams = this.defineAuth(requestParams);
 
@@ -38,7 +38,7 @@ export class ServerService {
         console.log('|-----------------------------------------------------------------------------------------------');
         console.log('');
       })
-    );
+    ).toPromise();
   }
 
   // private showMessage(message: string, status: string) {
