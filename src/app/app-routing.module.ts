@@ -24,6 +24,7 @@ import {IndexComponent as OrdersIndexComponent} from './components/order/index/i
 import {IndexComponent as UsersIndexComponent} from './components/users/index/index.component';
 import {LoginComponent as UsersLoginComponent} from './components/users/login/login.component';
 import {DashboardComponent as UsersDashboardComponent} from './components/users/dashboard/dashboard.component';
+import {SignupComponent as UserSignupComponent} from './components/users/signup/signup.component';
 //<
 
 //>Admins
@@ -58,6 +59,7 @@ const routes: Routes = [
   {path: 'home', component: UsersDashboardComponent, canActivate: [UsersAuthGuard]},
   {path: 'users', component: UsersIndexComponent, canActivate: [UsersAuthGuard]},
   {path: 'login', component: UsersLoginComponent, canActivate: [UsersGuestGuard]},
+  {path: 'signup', component: UserSignupComponent, canActivate: [UsersGuestGuard]},
 
   {path: 'admin/login', component: AdminLoginComponent, canActivate: [AdminsGuestGuard]},
   {path: 'admin/home', component: AdminHomeComponent, canActivate: [UsersAuthGuard]},

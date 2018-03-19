@@ -1,0 +1,37 @@
+<mat-card>
+  <mat-card-content>
+    <h2>Set your info</h2>
+    <div class="user-data-container">
+      <mat-form-field>
+        <input matInput
+               [(ngModel)]="firstName"
+               placeholder="Your first name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput
+               [(ngModel)]="lastName"
+               placeholder="Your last name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput
+               [(ngModel)]="phoneNumber"
+               placeholder="Your phone number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput
+               [(ngModel)]="email"
+               placeholder="Your email address">
+      </mat-form-field>
+      <mat-form-field>
+
+        <input matInput type="password"
+               [(ngModel)]="password"
+               placeholder="Your password">
+      </mat-form-field>
+    </div>
+    <button (click)="userSignup()" color="primary" mat-raised-button>Register</button>
+  </mat-card-content>
+</mat-card>

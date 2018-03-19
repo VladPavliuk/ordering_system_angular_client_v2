@@ -4,6 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
+import {FormsModule} from '@angular/forms';
 
 //> Angular material
 import {
@@ -71,7 +72,8 @@ import {HomeComponent} from './components/admins/home/home.component';
 import {DashboardComponent} from './components/users/dashboard/dashboard.component';
 import {OrganizationsComponent} from './components/users/dashboard/organizations/organizations.component';
 import {InfoComponent as UserInfoComponent} from './components/users/dashboard/info/info.component';
-import { OrdersComponent as UserOrdersCompontn } from './components/users/dashboard/orders/orders.component';
+import {OrdersComponent as UserOrdersComponent} from './components/users/dashboard/orders/orders.component';
+import {SignupComponent as UserSignupComponent} from './components/users/signup/signup.component';
 //<
 
 //> Guards
@@ -80,6 +82,7 @@ import {UsersGuestGuard} from './guards/users-guest-guard';
 import {AdminsAuthGuard} from './guards/admins-auth-guard';
 import {AdminsGuestGuard} from './guards/admins-guest-guard';
 import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-to-user-guard';
+
 //<
 
 @NgModule({
@@ -107,13 +110,15 @@ import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-t
     OrganizationsComponent,
     UserOwnerOrganizationsComponent,
     UserInfoComponent,
-    UserOrdersCompontn
+    UserOrdersComponent,
+    UserSignupComponent
   ],
   entryComponents: [
     SnackBarComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,

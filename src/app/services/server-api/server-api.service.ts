@@ -90,6 +90,25 @@ class UserApi implements StandardActions<User> {
     });
   }
 
+  signup(firstName: string, lastName: string, email: string, phoneNumber: string, password: string): Promise<any> {
+    return this.serverService.request({
+      method: 'post',
+      body: {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
+        password: password
+      },
+      messageError: 'Invalid!',
+      messageSuccess: 'Success signup',
+      url: 'api/account/register'
+    }).then(res => {
+      console.log(res);
+      // this.login();
+    });
+  }
+
   getUserInfo(): Promise<User> {
     return this.serverService.request({
       method: 'get',

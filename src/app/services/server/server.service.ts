@@ -5,7 +5,8 @@ import {RequestStructure} from '../../essences/RequestStructure';
 import {AuthService} from '../../services/auth/auth.service';
 import {HttpHeaders} from '@angular/common/http/src/headers';
 import {SnackBarService} from '../snack-bar/snack-bar.service';
-import {tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
+import {of} from 'rxjs/observable/of';
 
 @Injectable()
 export class ServerService {
@@ -31,25 +32,50 @@ export class ServerService {
       body: requestParams.body
     }).pipe(
       tap(res => {
-        console.log('');
+        if (requestParams.messageSuccess) {
+          this.showResponseMessage(requestParams.messageSuccess, 'success');
+        }
+
         console.log('|-----------------------------------------------------------------------------------------------');
         console.log('|REQUEST:', requestParams);
         console.log('|RESPONSE:', res);
         console.log('|-----------------------------------------------------------------------------------------------');
-        console.log('');
+      }),
+      catchError(err => {
+        if (requestParams.messageError) {
+          this.showResponseMessage(requestParams.messageError, 'error');
+        }
+        console.error('|-----------------------------------------------------------------------------------------------');
+        console.error('|REQUEST:', requestParams);
+        console.error('|RESPONSE:', err);
+        console.error('|-----------------------------------------------------------------------------------------------');
+
+        return of('error');
       })
     ).toPromise();
   }
 
-  // private showMessage(message: string, status: string) {
-  //   this.snackBarService.show({
-  //     data: {
-  //       message: message,
-  //     },
-  //     panelClass: status,
-  //     duration: 10000
-  //   });
+  // private handleErrorResponse<T>(operation = 'operation', result?: T) {
+  //   return (error: any): Observable<T> => {
+  //
+  //     console.error(error);
+  //     console.error(error);
+  //     console.error(error);
+  //     console.error(error);
+  //
+  //     return of(result as T);
+  //   };
   // }
+
+  private showResponseMessage(message: string, status: string): any {
+    this.snackBarService.show({
+      data: {
+        message: message,
+      },
+      panelClass: status,
+      duration: 1000
+    });
+  }
 
   private defineHeaders(requestParams: RequestStructure): RequestStructure {
     if (!requestParams.headers) {
