@@ -101,11 +101,8 @@ class UserApi implements StandardActions<User> {
         password: password
       },
       messageError: 'Invalid!',
-      messageSuccess: 'Success signup',
+      messageSuccess: 'Success signup!',
       url: 'api/account/register'
-    }).then(res => {
-      console.log(res);
-      // this.login();
     });
   }
 

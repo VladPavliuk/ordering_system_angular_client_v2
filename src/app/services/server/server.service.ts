@@ -27,32 +27,40 @@ export class ServerService {
     requestParams = this.defineHeaders(requestParams);
     requestParams = this.defineAuth(requestParams);
 
-    return this.httpDriver.request(requestParams.method, this.apiDomain + requestParams.url, {
-      headers: requestParams.headers,
-      body: requestParams.body
-    }).pipe(
-      tap(res => {
-        if (requestParams.messageSuccess) {
-          this.showResponseMessage(requestParams.messageSuccess, 'success');
-        }
+    return new Promise((resolve, reject) => {
+      this.httpDriver.request(requestParams.method, this.apiDomain + requestParams.url, {
+        headers: requestParams.headers,
+        body: requestParams.body
+      }).toPromise()
+        .then(res => {
+          this.handleSuccessResponse(res, requestParams);
+          resolve(res);
+        }).catch(err => {
+        this.handleErrorResponse(err, requestParams);
+        reject(err);
+      });
+    });
+  }
 
-        console.log('|-----------------------------------------------------------------------------------------------');
-        console.log('|REQUEST:', requestParams);
-        console.log('|RESPONSE:', res);
-        console.log('|-----------------------------------------------------------------------------------------------');
-      }),
-      catchError(err => {
-        if (requestParams.messageError) {
-          this.showResponseMessage(requestParams.messageError, 'error');
-        }
-        console.error('|-----------------------------------------------------------------------------------------------');
-        console.error('|REQUEST:', requestParams);
-        console.error('|RESPONSE:', err);
-        console.error('|-----------------------------------------------------------------------------------------------');
+  private handleSuccessResponse(response, requestParams: RequestStructure) {
+    if (requestParams.messageSuccess) {
+      this.showResponseMessage(requestParams.messageSuccess, 'success');
+    }
 
-        return of('error');
-      })
-    ).toPromise();
+    console.log('|-----------------------------------------------------------------------------------------------');
+    console.log('|REQUEST:', requestParams);
+    console.log('|RESPONSE:', response);
+    console.log('|-----------------------------------------------------------------------------------------------');
+  }
+
+  private handleErrorResponse(response, requestParams: RequestStructure) {
+    if (requestParams.messageError) {
+      this.showResponseMessage(requestParams.messageError, 'error');
+    }
+    console.error('|-----------------------------------------------------------------------------------------------');
+    console.error('|REQUEST:', requestParams);
+    console.error('|RESPONSE:', response);
+    console.error('|-----------------------------------------------------------------------------------------------');
   }
 
   // private handleErrorResponse<T>(operation = 'operation', result?: T) {
