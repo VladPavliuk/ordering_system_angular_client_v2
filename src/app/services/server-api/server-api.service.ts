@@ -168,6 +168,19 @@ class UserApi implements StandardActions<User> {
   }
 }
 
+class DaysApi {
+  public constructor(
+    private serverService: ServerService
+  ) {}
+
+  index(): Promise<any> {
+    return this.serverService.request({
+      url: 'api/days',
+      method: 'get'
+    });
+  }
+}
+
 // class OrderApi implements StandardActions {
 // }
 

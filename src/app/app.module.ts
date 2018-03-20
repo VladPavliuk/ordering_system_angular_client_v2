@@ -21,6 +21,7 @@ import {
   MatGridListModule,
   MatSelectModule,
   MatListModule,
+  MatCheckboxModule,
   MatSnackBarModule
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
@@ -138,6 +139,7 @@ import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-t
     MatSelectModule,
     MatListModule,
     MatTableModule,
+    MatCheckboxModule,
     MatSnackBarModule,
     CdkTableModule,
 

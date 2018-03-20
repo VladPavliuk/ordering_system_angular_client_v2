@@ -7,6 +7,7 @@ import {HttpHeaders} from '@angular/common/http/src/headers';
 import {SnackBarService} from '../snack-bar/snack-bar.service';
 import {catchError, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class ServerService {
@@ -17,7 +18,8 @@ export class ServerService {
   constructor(
     private httpDriver: HttpClient,
     private authService: AuthService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private router: Router
   ) {
     this.apiDomain = 'http://localhost:5000/';
     this.AUTH_TOKEN_HEADER_KEY = 'Authorization';
@@ -54,6 +56,12 @@ export class ServerService {
   }
 
   private handleErrorResponse(response, requestParams: RequestStructure) {
+    if (response.status === 401) {
+      this.authService.deleteToken();
+      this.authService.deleteAdminStatusToken();
+      this.router.navigate(['/login']);
+    }
+
     if (requestParams.messageError) {
       this.showResponseMessage(requestParams.messageError, 'error');
     }

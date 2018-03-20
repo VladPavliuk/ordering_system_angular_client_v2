@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   logout(): void {
-    console.log('yeaaaa');
     this.authService.deleteToken();
     this.router.navigate(['/login']);
   }

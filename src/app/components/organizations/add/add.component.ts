@@ -9,8 +9,42 @@ import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  public title: string;
+  public daysList: { internalTitle: string, externalTitle: string }[] = [
+    {
+      internalTitle: '',
+      externalTitle: ''
+    },
+    {
+      internalTitle: '',
+      externalTitle: ''
+    },
+    {
+      internalTitle: '',
+      externalTitle: ''
+    },
+    {
+      internalTitle: '',
+      externalTitle: ''
+    },
+    {
+      internalTitle: '',
+      externalTitle: ''
+    },
+    {
+      internalTitle: '',
+      externalTitle: ''
+    },
+    {
+      internalTitle: '',
+      externalTitle: ''
+    },
+  ];
 
+  public title: string;
+  public selectedMoments = [
+    new Date(2018, 1, 9, 9),
+    new Date(2018, 3, 21, 18)
+  ];
   constructor(
     private serverApiService: ServerApiService,
     private location: Location,
@@ -23,6 +57,10 @@ export class AddComponent implements OnInit {
 
   onTitleInput(event) {
     this.title = event.target.value;
+  }
+
+  onDayAndNightClick() {
+
   }
 
   create(): void {

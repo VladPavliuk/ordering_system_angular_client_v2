@@ -6,3 +6,7 @@
 .organization-creation-container > * {
     width: 100%;
 }
+
+.day-time-picker {
+    /*width: 140px;*/
+}
