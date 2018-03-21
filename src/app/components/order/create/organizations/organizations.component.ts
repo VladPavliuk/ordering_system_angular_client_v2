@@ -10,7 +10,6 @@ import { Organization } from '../../../../essences/Organization';
 export class OrganizationsComponent implements OnInit {
   public displayedColumns = ['avatar', 'title', 'actions'];
   @Output() onOrganizationSelected = new EventEmitter<Organization>();
-
   @Input() public organizations: Organization[];
 
   constructor(private organizationsService: OrganizationsService) { }

@@ -13,6 +13,7 @@ export class ServerApiService {
   public serviceApi: ServiceApi;
   public userApi: UserApi;
   public orderApi: OrderApi;
+  public daysApi: DaysApi;
 
   public constructor(
     private serverService: ServerService,
@@ -22,6 +23,7 @@ export class ServerApiService {
     this.serviceApi = new ServiceApi(serverService);
     this.userApi = new UserApi(serverService, authService);
     this.orderApi = new OrderApi(serverService, authService);
+    this.daysApi = new DaysApi(serverService);
   }
 
 }

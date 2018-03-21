@@ -59,6 +59,7 @@ import {SingleComponent as ServiceSingleComponent} from './components/services/s
 import {AvailableServicesComponent} from './components/organizations/available-services/available-services.component';
 
 import {CreateComponent as CreateOrderComponent} from './components/order/create/create.component';
+import {DayComponent as DayScheduleComponent } from './components/organizations/add/includes/day/day.component';
 import {OrganizationsComponent as OrderOrganizationsComponent} from './components/order/create/organizations/organizations.component';
 import {ServicesComponent as OrderServicesComponent} from './components/order/create/services/services.component';
 import {IndexComponent  as OrdersIndexComponent} from './components/order/index/index.component';
@@ -112,7 +113,8 @@ import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-t
     UserOwnerOrganizationsComponent,
     UserInfoComponent,
     UserOrdersComponent,
-    UserSignupComponent
+    UserSignupComponent,
+    DayScheduleComponent
   ],
   entryComponents: [
     SnackBarComponent

@@ -1,0 +1,12 @@
+<input [owlDateTimeTrigger]="day"
+       class="day-time-picker"
+       placeholder="Click to choose schedule"
+       value="09:00 AM"
+       (dateTimeChange)="onSetDate($event)"
+       [(ngModel)]="selectedDay"
+       [rangeSeparator]="'-'"
+       [selectMode]="'range'"
+       [owlDateTime]="day">
+<owl-date-time [pickerType]="'timer'"
+               [hour12Timer]="false"
+               #day></owl-date-time>

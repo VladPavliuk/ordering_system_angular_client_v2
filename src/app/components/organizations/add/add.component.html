@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title>Orgnization creation form</mat-card-title>
+    <mat-card-title>Organization creation form</mat-card-title>
     <mat-card-content>
         <div class="organization-creation-container">
             <mat-form-field>
@@ -18,117 +18,19 @@
             <th>Day and Night</th>
             <th>Holiday</th>
         </tr>
-        <tr>
-            <td>Monday</td>
+        <tr *ngFor="let day of daysList">
+            <td>{{ day.title }}</td>
             <td>
-                <input [owlDateTimeTrigger]="dtMonday"
-                       class="day-time-picker"
-                       placeholder="Click to choose schedule"
-                       value="09:00 AM"
-                       [(ngModel)]="selectedMoments"
-                       [rangeSeparator]="'-'"
-                       [selectMode]="'range'"
-                       [owlDateTime]="dtMonday">
-                <owl-date-time [pickerType]="'timer'"
-                               [hour12Timer]="false"
-                               #dtMonday></owl-date-time>
+            <app-schedule-day (onSetDateEvent)="onSetDate($event)"
+                              #scheduleComponent
+                              [day]="day"></app-schedule-day>
             </td>
             <td>
-                <mat-checkbox></mat-checkbox>
+                <mat-checkbox (change)="setDayAndNightStatus(day, $event)"></mat-checkbox>
             </td>
             <td>
-                <mat-checkbox></mat-checkbox>
+                <mat-checkbox (change)="setHolidayStatus(day, $event)"></mat-checkbox>
             </td>
         </tr>
-        <tr>
-            <td>Monday</td>
-            <td>
-                <input [owlDateTimeTrigger]="dtMonday"
-                       class="day-time-picker"
-                       placeholder="Click to choose schedule"
-                       value="09:00 AM"
-                       [(ngModel)]="selectedMoments"
-                       [rangeSeparator]="'-'"
-                       [selectMode]="'range'"
-                       [owlDateTime]="dtMonday">
-                <owl-date-time [pickerType]="'timer'"
-                               [hour12Timer]="false"
-                               #dtMonday></owl-date-time>
-            </td>
-            <td>
-                <mat-checkbox></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox></mat-checkbox>
-            </td>
-        </tr>
-        <tr>
-            <td>Monday</td>
-            <td>
-                <input [owlDateTimeTrigger]="dtMonday"
-                       class="day-time-picker"
-                       placeholder="Click to choose schedule"
-                       value="09:00 AM"
-                       [(ngModel)]="selectedMoments"
-                       [rangeSeparator]="'-'"
-                       [selectMode]="'range'"
-                       [owlDateTime]="dtMonday">
-                <owl-date-time [pickerType]="'timer'"
-                               [hour12Timer]="false"
-                               #dtMonday></owl-date-time>
-            </td>
-            <td>
-                <mat-checkbox></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox></mat-checkbox>
-            </td>
-        </tr>
-        <tr>
-            <td>Monday</td>
-            <td>
-                <input [owlDateTimeTrigger]="dtMonday"
-                       class="day-time-picker"
-                       placeholder="Click to choose schedule"
-                       value="09:00 AM"
-                       [(ngModel)]="selectedMoments"
-                       [rangeSeparator]="'-'"
-                       [selectMode]="'range'"
-                       [owlDateTime]="dtMonday">
-                <owl-date-time [pickerType]="'timer'"
-                               [hour12Timer]="false"
-                               #dtMonday></owl-date-time>
-            </td>
-            <td>
-                <mat-checkbox></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox></mat-checkbox>
-            </td>
-        </tr>
-        <tr>
-            <td>Monday</td>
-            <td>
-                <input [owlDateTimeTrigger]="dtMonday"
-                       class="day-time-picker"
-                       placeholder="Click to choose schedule"
-                       value="09:00 AM"
-                       [(ngModel)]="selectedMoments"
-                       [rangeSeparator]="'-'"
-                       [selectMode]="'range'"
-                       [owlDateTime]="dtMonday">
-                <owl-date-time [pickerType]="'timer'"
-                               [hour12Timer]="false"
-                               #dtMonday></owl-date-time>
-            </td>
-            <td>
-                <mat-checkbox></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox></mat-checkbox>
-            </td>
-        </tr>
-
-
     </table>
 </mat-card>
