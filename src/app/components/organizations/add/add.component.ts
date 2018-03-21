@@ -79,49 +79,6 @@ export class AddComponent implements OnInit {
     }
   }
 
-  // this.scheduleComponents.toArray().forEach(el => {
-  //   if (el.day.id === day.id) {
-  //
-  //   }
-  // });
-
-  // getDayById(id: number): DaySchedule | boolean {
-  //
-  //
-  //   return false;
-  // }
-
-  // isDayExistsInList(day) {
-  //   let i;
-  //
-  //   for (i = 0; this.daysSchedule.length; i++) {
-  //     if (day.id === this.daysSchedule[i].id) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-  //
-  // addDayToList(day) {
-  //   if (!this.isDayExistsInList(day)) {
-  //     this.daysSchedule.push({
-  //       id: day.id,
-  //       isHoliday: day.isHoliday
-  //     });
-  //   }
-  // }
-  //
-  // removeDayFromList(day) {
-  //   let i;
-  //
-  //   for (i = 0; this.daysSchedule.length; i++) {
-  //     if (day.id === this.daysSchedule[i].id) {
-  //       this.daysSchedule.splice(i, 1);
-  //     }
-  //   }
-  //   return false;
-  // }
-
   onSetDate(date) {
 
     console.log(date);

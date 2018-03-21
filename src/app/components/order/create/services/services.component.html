@@ -4,7 +4,9 @@
          class="item"
          *ngFor="let service of services">
       <div class="item-icon">
-        <mat-icon>dashboard</mat-icon>
+        <!--<mat-icon>dashboard</mat-icon>-->
+        <img [src]="'http://localhost:5000' + service.imagePath"
+             [alt]="service.title">
       </div>
       <div class="item-label">
         {{ service.title }}

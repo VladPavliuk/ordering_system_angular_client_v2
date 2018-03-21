@@ -25,6 +25,8 @@
                               (onSetDateEvent)="onSetDate($event)"
                               #scheduleComponent
                               [day]="day"></app-schedule-day>
+                <span *ngIf="day.isHoliday"><em>Вихідний</em></span>
+                <span *ngIf="day.isAllDayAndNight"><em>Цілодобово</em></span>
             </td>
             <td>
                 <mat-checkbox #dayIsDayAndCheckbox

@@ -5,6 +5,14 @@
 .item {
     display: inline-block;
     width: 33.333%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 15px;
+    transition: all .3s;
+}
+
+.item-icon img {
+    height: 170px
 }
 
 .item:hover{
