@@ -4,6 +4,8 @@ import {Location} from '@angular/common';
 import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 import {DayComponent} from './includes/day/day.component';
 import {MatCheckboxChange} from '@angular/material/checkbox/typings/checkbox';
+import {DaySchedule} from '../../../essences/DaySchedule';
+import {MatCheckboxModule} from '@angular/material';
 
 @Component({
   selector: 'app-add',
@@ -11,17 +13,18 @@ import {MatCheckboxChange} from '@angular/material/checkbox/typings/checkbox';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  public daysList: any[] = [];
+  public daysList: DaySchedule[] = [];
   public title: string;
-  public daysSchedule: {
-    id: number,
-    title?: string,
-    from?: string,
-    to?: string,
-    isAllDayAndNight?: boolean,
-    isHoliday?: boolean
-  }[] = [];
-
+  // public daysSchedule: {
+  //   id: number,
+  //   title?: string,
+  //   from?: string,
+  //   to?: string,
+  //   isAllDayAndNight?: boolean,
+  //   isHoliday?: boolean
+  // }[] = [];
+  @ViewChildren('dayIsDayAndCheckbox') public dayIsDayAndCheckbox: QueryList<MatCheckboxModule>;
+  @ViewChildren('dayIsHolidayCheckbox') public dayIsHolidayCheckbox: QueryList<MatCheckboxModule>;
   @ViewChildren('scheduleComponent') public scheduleComponents: QueryList<DayComponent>;
 
   constructor(
@@ -46,62 +49,78 @@ export class AddComponent implements OnInit {
       });
   }
 
-  setDayAndNightStatus(day, status: MatCheckboxChange) {
-    if (status.checked) {
-      day.isHoliday = false;
-      day.isAllDayAndNight = true;
-      this.addDayToList(day);
-    } else {
-      this.removeDayFromList(day);
-    }
-  }
-
-  setHolidayStatus(day, status: MatCheckboxChange) {
-    if (status.checked) {
-      day.isHoliday = true;
-      day.isAllDayAndNight = false;
-      this.addDayToList(day);
-    } else {
-      this.removeDayFromList(day);
-    }
-
-    // this.scheduleComponents.toArray().forEach(el => {
-    //   if (el.day.id === day.id) {
-    //
-    //   }
-    // });
-  }
-
-  isDayExistsInList(day) {
-    let i;
-
-    for (i = 0; this.daysSchedule.length; i++) {
-      if (day.id === this.daysSchedule[i].id) {
-        return true;
+  setDayAndNightStatus(day: DaySchedule, iterator: number, status: MatCheckboxChange) {
+    for (let i = 0; i < this.daysList.length; i++) {
+      if (day.id === this.daysList[i].id) {
+        this.daysList[i].isAllDayAndNight = status.checked;
+        this.daysList[i].isHoliday = false;
       }
     }
-    return false;
-  }
 
-  addDayToList(day) {
-    if (!this.isDayExistsInList(day)) {
-      this.daysSchedule.push({
-        id: day.id,
-        isHoliday: day.isHoliday
-      });
-    }
-  }
-
-  removeDayFromList(day) {
-    let i;
-
-    for (i = 0; this.daysSchedule.length; i++) {
-      if (day.id === this.daysSchedule[i].id) {
-        this.daysSchedule.splice(i, 1);
+    for (let i = 0; i < this.dayIsHolidayCheckbox.toArray().length; i++) {
+      if (iterator + '-is-holiday-checkbox' === this.dayIsHolidayCheckbox.toArray()[i]['id']) {
+        this.dayIsHolidayCheckbox.toArray()[i]['checked'] = false;
       }
     }
-    return false;
   }
+
+  setHolidayStatus(day: DaySchedule, iterator: number, status: MatCheckboxChange) {
+    for (let i = 0; i < this.daysList.length; i++) {
+      if (day.id === this.daysList[i].id) {
+        this.daysList[i].isHoliday = status.checked;
+        this.daysList[i].isAllDayAndNight = false;
+      }
+    }
+
+    for (let i = 0; i < this.dayIsDayAndCheckbox.toArray().length; i++) {
+      if (iterator + '-is-day-and-night-checkbox' === this.dayIsDayAndCheckbox.toArray()[i]['id']) {
+        this.dayIsDayAndCheckbox.toArray()[i]['checked'] = false;
+      }
+    }
+  }
+
+  // this.scheduleComponents.toArray().forEach(el => {
+  //   if (el.day.id === day.id) {
+  //
+  //   }
+  // });
+
+  // getDayById(id: number): DaySchedule | boolean {
+  //
+  //
+  //   return false;
+  // }
+
+  // isDayExistsInList(day) {
+  //   let i;
+  //
+  //   for (i = 0; this.daysSchedule.length; i++) {
+  //     if (day.id === this.daysSchedule[i].id) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
+  //
+  // addDayToList(day) {
+  //   if (!this.isDayExistsInList(day)) {
+  //     this.daysSchedule.push({
+  //       id: day.id,
+  //       isHoliday: day.isHoliday
+  //     });
+  //   }
+  // }
+  //
+  // removeDayFromList(day) {
+  //   let i;
+  //
+  //   for (i = 0; this.daysSchedule.length; i++) {
+  //     if (day.id === this.daysSchedule[i].id) {
+  //       this.daysSchedule.splice(i, 1);
+  //     }
+  //   }
+  //   return false;
+  // }
 
   onSetDate(date) {
 

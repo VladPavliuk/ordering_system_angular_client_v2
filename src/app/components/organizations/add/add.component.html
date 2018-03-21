@@ -18,18 +18,23 @@
             <th>Day and Night</th>
             <th>Holiday</th>
         </tr>
-        <tr *ngFor="let day of daysList">
+        <tr *ngFor="let day of daysList; let i=index">
             <td>{{ day.title }}</td>
             <td>
-            <app-schedule-day (onSetDateEvent)="onSetDate($event)"
+            <app-schedule-day *ngIf="!day.isHoliday && !day.isAllDayAndNight"
+                              (onSetDateEvent)="onSetDate($event)"
                               #scheduleComponent
                               [day]="day"></app-schedule-day>
             </td>
             <td>
-                <mat-checkbox (change)="setDayAndNightStatus(day, $event)"></mat-checkbox>
+                <mat-checkbox #dayIsDayAndCheckbox
+                              [id]="i + '-is-day-and-night-checkbox'"
+                              (change)="setDayAndNightStatus(day, i, $event)"></mat-checkbox>
             </td>
             <td>
-                <mat-checkbox (change)="setHolidayStatus(day, $event)"></mat-checkbox>
+                <mat-checkbox #dayIsHolidayCheckbox
+                              [id]="i + '-is-holiday-checkbox'"
+                              (change)="setHolidayStatus(day, i, $event)"></mat-checkbox>
             </td>
         </tr>
     </table>
