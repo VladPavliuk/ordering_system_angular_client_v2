@@ -1,0 +1,35 @@
+<div *ngIf="order" class="mt-2">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Order ({{ order.user_ID.userName }})</h5>
+            <div class="card-text">
+                Price: <b>$ {{ order.price }}</b>
+                <br>
+                Duration: <b>{{ order.service_ID.duration }} min.</b>
+                <br>
+                Started at: <b>{{ moment(order.startedAt).format('HH:mm DD-MMM-YYYY') }}</b>
+            </div>
+
+            <hr>
+            <p>
+                Please, set your mark
+            </p>
+            <div *ngIf="!actualRate">
+                <mat-icon style="color: blue; cursor: pointer; outline: none; user-select: none"
+                          *ngFor="let iterator of [1,2,3,4,5]; let i=index"
+                          (click)="onMarkClick(iterator)"
+                          (mouseenter)="onMouseEnterOnStart(iterator)"
+                          (mouseleave)="onMouseEnterOnStart(0)">
+                    {{ i < currentRate || i < visualRate ? activeStarIconName : unActiveStarIconName }}
+                </mat-icon>
+            </div>
+            <div *ngIf="actualRate">
+                <mat-icon style="outline: none; user-select: none"
+                          *ngFor="let iterator of [1,2,3,4,5]; let i=index">
+                    {{ i < actualRate ? activeStarIconName : unActiveStarIconName }}
+                </mat-icon>
+            </div>
+
+        </div>
+    </div>
+</div>

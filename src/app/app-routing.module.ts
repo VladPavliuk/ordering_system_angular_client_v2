@@ -18,6 +18,7 @@ import {SingleComponent as ServiceSingleComponent} from './components/services/s
 //> Orders
 import {CreateComponent as CreateOrderComponent} from './components/order/create/create.component';
 import {IndexComponent as OrdersIndexComponent} from './components/order/index/index.component';
+import {SingleComponent as OrderSingleComponent} from './components/order/single/single.component';
 //<
 
 //> Users
@@ -47,7 +48,11 @@ const routes: Routes = [
   {path: 'organizations-list', component: OrganizationsIndexComponent, canActivate: [UsersAuthGuard]},
   {path: 'organization-add', component: OrganizationAddComponent, canActivate: [UsersAuthGuard]},
   {path: 'organization/:id', component: OrganizationSingleComponent, canActivate: [UsersAuthGuard]},
-  {path: 'organization/:id/available-services', component: OrganizationAvailableServicesComponent, canActivate: [IsOrganizationBelongToUserGuard]},
+  {
+    path: 'organization/:id/available-services',
+    component: OrganizationAvailableServicesComponent,
+    canActivate: [IsOrganizationBelongToUserGuard]
+  },
 
   {path: 'services-list', component: ServicesIndexComponent, canActivate: [UsersAuthGuard]},
   {path: 'service-add', component: ServiceAddComponent, canActivate: [UsersAuthGuard]},
@@ -55,6 +60,7 @@ const routes: Routes = [
 
   {path: 'order', component: CreateOrderComponent},
   {path: 'orders', component: OrdersIndexComponent, canActivate: [UsersAuthGuard]},
+  {path: 'order/:id', component: OrderSingleComponent, canActivate: [UsersAuthGuard]},
 
   {path: 'home', component: UsersDashboardComponent, canActivate: [UsersAuthGuard]},
   {path: 'users', component: UsersIndexComponent, canActivate: [UsersAuthGuard]},

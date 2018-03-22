@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatMenuModule,
+  MatDialogModule,
   MatToolbarModule,
   MatStepperModule,
   MatIconModule,
@@ -59,11 +60,12 @@ import {SingleComponent as ServiceSingleComponent} from './components/services/s
 import {AvailableServicesComponent} from './components/organizations/available-services/available-services.component';
 
 import {CreateComponent as CreateOrderComponent} from './components/order/create/create.component';
-import {DayComponent as DayScheduleComponent } from './components/organizations/add/includes/day/day.component';
+import {DayComponent as DayScheduleComponent} from './components/organizations/add/includes/day/day.component';
 import {OrganizationsComponent as OrderOrganizationsComponent} from './components/order/create/organizations/organizations.component';
 import {ServicesComponent as OrderServicesComponent} from './components/order/create/services/services.component';
 import {IndexComponent  as OrdersIndexComponent} from './components/order/index/index.component';
-
+import {SingleComponent as OrderSingleComponent} from './components/order/single/single.component';
+import {MarkupComponent as MarkupDialogComponent} from './components/order/single/includes/markup/markup.component';
 //> Users
 import {IndexComponent as UsersIndexComponent} from './components/users/index/index.component';
 import {LoginComponent as UsersLoginComponent} from './components/users/login/login.component';
@@ -114,7 +116,9 @@ import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-t
     UserInfoComponent,
     UserOrdersComponent,
     UserSignupComponent,
-    DayScheduleComponent
+    DayScheduleComponent,
+    OrderSingleComponent,
+    MarkupDialogComponent
   ],
   entryComponents: [
     SnackBarComponent
@@ -130,6 +134,7 @@ import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-t
     MatToolbarModule,
     MatStepperModule,
     MatIconModule,
+    MatDialogModule,
     MatCardModule,
     MatSidenavModule,
     MatFormFieldModule,

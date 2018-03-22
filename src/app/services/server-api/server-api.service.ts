@@ -59,6 +59,32 @@ class OrderApi {
     });
   }
 
+  show(id: number): Promise<any> {
+    return this.serverService.request({
+      method: 'get',
+      auth: true,
+      url: 'api/orders/' + id
+    });
+  }
+
+  setMarkup(id: number, markup: { value: number, comment: string }): Promise<any> {
+    return this.serverService.request({
+      method: 'post',
+      auth: true,
+      body: markup,
+      messageSuccess: 'Markup is set',
+      url: 'api/orders/' + id + '/set-markup'
+    });
+  }
+
+  getMarkup(id: number): Promise<any> {
+    return this.serverService.request({
+      method: 'get',
+      auth: true,
+      url: 'api/orders/' + id + '/get-markup'
+    });
+  }
+
   public getAuthUserOrders(): Promise<any> {
     return this.serverService.request({
       method: 'get',

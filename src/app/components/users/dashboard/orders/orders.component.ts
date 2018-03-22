@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Organization} from '../../../../essences/Organization';
 import {ServerApiService} from '../../../../services/server-api/server-api.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-orders',
@@ -10,7 +11,8 @@ import {ServerApiService} from '../../../../services/server-api/server-api.servi
 export class OrdersComponent implements OnInit {
 
   public usersOrders: any[];
-  displayedColumns = ['organization', 'service', 'price'];
+  public moment = moment;
+  displayedColumns = ['organization', 'service', 'price', 'started_at', 'actions'];
 
   constructor(
     private serverApiService: ServerApiService

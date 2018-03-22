@@ -2,21 +2,25 @@
     width: 100%;
 }
 
-.item {
-    display: inline-block;
+.item-wrapper {
     width: 33.333%;
-    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.item {
+    margin: 10px 20px;
     padding: 10px;
-    border: 15px;
+    border-radius: 15px;
     transition: all .3s;
+    border: 2px solid #202020;
 }
 
 .item-icon img {
     height: 170px
 }
 
-.item:hover{
-    background-color: #6c6e6c;
+.item:hover {
+    background-color: #555755;
     cursor: pointer;
 }
 
@@ -34,6 +38,6 @@
     font-size: 150pt !important;
 }
 
-.mat-icon  {
+.mat-icon {
     width: 100%;
 }
