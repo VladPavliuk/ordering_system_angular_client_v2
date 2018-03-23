@@ -8,20 +8,20 @@ import {SnackBarService} from '../snack-bar/snack-bar.service';
 import {catchError, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 import {Router} from '@angular/router';
+import {Globals} from '../../globals';
 
 @Injectable()
 export class ServerService {
 
-  public readonly apiDomain: string;
   private readonly AUTH_TOKEN_HEADER_KEY: string;
 
   constructor(
     private httpDriver: HttpClient,
     private authService: AuthService,
     private snackBarService: SnackBarService,
+    private globals: Globals,
     private router: Router
   ) {
-    this.apiDomain = 'http://localhost:5000/';
     this.AUTH_TOKEN_HEADER_KEY = 'Authorization';
   }
 
@@ -30,7 +30,7 @@ export class ServerService {
     requestParams = this.defineAuth(requestParams);
 
     return new Promise((resolve, reject) => {
-      this.httpDriver.request(requestParams.method, this.apiDomain + requestParams.url, {
+      this.httpDriver.request(requestParams.method, this.globals.domain + '/' + requestParams.url, {
         headers: requestParams.headers,
         body: requestParams.body
       }).toPromise()

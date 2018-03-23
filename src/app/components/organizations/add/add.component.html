@@ -6,38 +6,38 @@
                 <input matInput (input)="onTitleInput($event)" placeholder="Organization title">
             </mat-form-field>
         </div>
+        Schedule
+        <table class="table">
+            <tr>
+                <th>Weekday</th>
+                <th>Day schedule</th>
+                <th>Day and Night</th>
+                <th>Holiday</th>
+            </tr>
+            <tr *ngFor="let day of daysList; let i=index">
+                <td>{{ day.title }}</td>
+                <td>
+                    <app-schedule-day *ngIf="!day.isHoliday && !day.isAllDayAndNight"
+                                      (onSetDateEvent)="onSetDate($event)"
+                                      #scheduleComponent
+                                      [day]="day"></app-schedule-day>
+                    <span *ngIf="day.isHoliday"><em>Holiday</em></span>
+                    <span *ngIf="day.isAllDayAndNight"><em>All day and night</em></span>
+                </td>
+                <td>
+                    <mat-checkbox #dayIsDayAndCheckbox
+                                  [id]="i + '-is-day-and-night-checkbox'"
+                                  (change)="setDayAndNightStatus(day, i, $event)"></mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox #dayIsHolidayCheckbox
+                                  [id]="i + '-is-holiday-checkbox'"
+                                  (change)="setHolidayStatus(day, i, $event)"></mat-checkbox>
+                </td>
+            </tr>
+        </table>
     </mat-card-content>
     <mat-card-actions>
         <button (click)="create()" color="primary" mat-raised-button>Add organization</button>
     </mat-card-actions>
-
-    <table class="table">
-        <tr>
-            <th>Weekday</th>
-            <th>Schedule</th>
-            <th>Day and Night</th>
-            <th>Holiday</th>
-        </tr>
-        <tr *ngFor="let day of daysList; let i=index">
-            <td>{{ day.title }}</td>
-            <td>
-            <app-schedule-day *ngIf="!day.isHoliday && !day.isAllDayAndNight"
-                              (onSetDateEvent)="onSetDate($event)"
-                              #scheduleComponent
-                              [day]="day"></app-schedule-day>
-                <span *ngIf="day.isHoliday"><em>Вихідний</em></span>
-                <span *ngIf="day.isAllDayAndNight"><em>Цілодобово</em></span>
-            </td>
-            <td>
-                <mat-checkbox #dayIsDayAndCheckbox
-                              [id]="i + '-is-day-and-night-checkbox'"
-                              (change)="setDayAndNightStatus(day, i, $event)"></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox #dayIsHolidayCheckbox
-                              [id]="i + '-is-holiday-checkbox'"
-                              (change)="setHolidayStatus(day, i, $event)"></mat-checkbox>
-            </td>
-        </tr>
-    </table>
 </mat-card>

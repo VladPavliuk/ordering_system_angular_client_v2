@@ -4,7 +4,7 @@
     </mat-card-title>
     <mat-card-content>
 
-        <mat-horizontal-stepper>
+        <mat-horizontal-stepper [selectedIndex]="stepperIndex">
             <mat-step label="Services">
                 <h5>First, choose service witch you are interested in</h5>
                 <app-order-services [services]="services"

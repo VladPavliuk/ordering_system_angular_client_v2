@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { OrganizationsService } from '../../../../services/organizations/organizations.service';
-import { Organization } from '../../../../essences/Organization';
+import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
+import {OrganizationsService} from '../../../../services/organizations/organizations.service';
+import {Organization} from '../../../../essences/Organization';
+import {Globals} from '../../../../globals';
 
 @Component({
   selector: 'app-order-organizations',
@@ -12,16 +13,19 @@ export class OrganizationsComponent implements OnInit {
   @Output() onOrganizationSelected = new EventEmitter<Organization>();
   @Input() public organizations: Organization[];
 
-  constructor(private organizationsService: OrganizationsService) { }
+  constructor(
+    private organizationsService: OrganizationsService,
+    public globals: Globals
+  ) {
+  }
 
   ngOnInit() {
-    
+
   }
 
   onOrganizationSelect(organization: Organization): void {
     this.onOrganizationSelected.emit(organization);
   }
-
 
 
 }

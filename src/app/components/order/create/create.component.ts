@@ -7,6 +7,8 @@ import {Service} from '../../../essences/Service';
 import {Location} from '@angular/common';
 import * as moment from 'moment';
 import {ServerApiService} from '../../../services/server-api/server-api.service';
+import {Router} from '@angular/router';
+import { Globals } from '../../../globals';
 
 @Component({
   selector: 'app-create',
@@ -15,6 +17,7 @@ import {ServerApiService} from '../../../services/server-api/server-api.service'
 })
 export class CreateComponent implements OnInit {
 
+  public stepperIndex = 0;
   public selectedOrganization: Organization;
   public selectedService: Service;
 
@@ -32,7 +35,8 @@ export class CreateComponent implements OnInit {
     private servicesService: ServicesService,
     private ordersService: OrdersService,
     private location: Location,
-    private serverApiService: ServerApiService
+    private router: Router,
+    private serverApiService: ServerApiService,
   ) {
   }
 
@@ -69,11 +73,12 @@ export class CreateComponent implements OnInit {
       Duration: this.selectedService.duration,
       StartedAt: moment(this.startingDate).format('YYYY-MM-DDTHH:mm:ss')
     }).then(res => {
-      this.location.back();
+      this.router.navigate(['/home']);
     });
   }
 
   onOrganizationSelect(organization: Organization) {
+    this.stepperIndex = 2;
     this.selectedOrganization = organization;
   }
 
@@ -89,6 +94,7 @@ export class CreateComponent implements OnInit {
     this.selectedService = service;
     this.serverApiService.serviceApi.organizationsList(service.id)
       .then(res => {
+        this.stepperIndex = 1;
         this.organizations = res;
       });
   }

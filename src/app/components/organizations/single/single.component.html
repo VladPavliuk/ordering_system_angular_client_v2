@@ -8,7 +8,7 @@
              (mouseleave)="onAvatarMouseOut()">
             <div class="organization-image-wrapper">
                 <img *ngIf="organization.imagePath"
-                     [src]="'http://localhost:5000/' + organization.imagePath"
+                     [src]="globals.domain + '/' + organization.imagePath"
                      alt="Profile image"
                      title="Profile image">
                 <button *ngIf="showUploadAvatarButton"

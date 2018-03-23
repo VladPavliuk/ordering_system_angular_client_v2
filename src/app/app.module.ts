@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 import {FormsModule} from '@angular/forms';
+import { Globals } from './globals';
 
 //> Angular material
 import {
@@ -152,6 +153,7 @@ import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-t
 
   ],
   providers: [
+    Globals,
     ServerService,
     AuthService,
     SnackBarService,

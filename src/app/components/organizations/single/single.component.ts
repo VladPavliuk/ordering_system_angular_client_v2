@@ -6,6 +6,7 @@ import {Service} from '../../../essences/Service';
 import {Location} from '@angular/common';
 import {ServerApiService} from '../../../services/server-api/server-api.service';
 import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
+import {Globals} from '../../../globals';
 
 @Component({
   selector: 'app-single',
@@ -26,6 +27,7 @@ export class SingleComponent implements OnInit {
     private route: ActivatedRoute,
     private serverApiService: ServerApiService,
     private location: Location,
+    public globals: Globals,
     private snackBarService: SnackBarService
   ) {
   }
