@@ -199,7 +199,8 @@ class UserApi implements StandardActions<User> {
 class DaysApi {
   public constructor(
     private serverService: ServerService
-  ) {}
+  ) {
+  }
 
   index(): Promise<any> {
     return this.serverService.request({
@@ -279,6 +280,13 @@ class OrganizationApi implements StandardActions<Organization> {
       method: 'delete',
       auth: true,
       url: 'api/organizations/unpin-service/' + organizationId + '/' + serviceId
+    });
+  }
+
+  getSchedule(id: number): Promise<any> {
+    return this.serverService.request({
+      method: 'get',
+      url: 'api/organizations/' + id + '/get-schedule'
     });
   }
 

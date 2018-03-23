@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
+import {DaySchedule} from '../../../../../essences/DaySchedule';
 
 @Component({
   selector: 'app-schedule-day',
@@ -21,8 +22,11 @@ export class DayComponent implements OnInit {
     ];
   }
 
-  onSetDate(day: any) {
-    this.onSetDateEvent.emit(this.selectedDay);
+  onSetDate() {
+    this.onSetDateEvent.emit({
+      schedule: this.selectedDay,
+      day: this.day
+    });
   }
 
 }

@@ -6,6 +6,7 @@ import {DayComponent} from './includes/day/day.component';
 import {MatCheckboxChange} from '@angular/material/checkbox/typings/checkbox';
 import {DaySchedule} from '../../../essences/DaySchedule';
 import {MatCheckboxModule} from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add',
@@ -80,15 +81,28 @@ export class AddComponent implements OnInit {
   }
 
   onSetDate(date) {
+    this.setScheduleByDay({
+      id: date.day.id,
+      from: date.schedule[0],
+      to: date.schedule[1]
+    });
+  }
 
-    console.log(date);
+  setScheduleByDay(day: { id: number, from: any, to: any }) {
+    for (let i = 0; i < this.daysList.length; i++) {
+      if (this.daysList[i].id === day.id) {
+        this.daysList[i].from = moment(day.from).format('HH:mm:ss');
+        this.daysList[i].to = moment(day.to).format('HH:mm:ss');
+      }
+    }
   }
 
   create(): void {
     this.serverApiService
       .organizationApi
       .store({
-        title: this.title
+        title: this.title,
+        schedule: this.daysList
       }).then(res => {
       this.snackBarService.show({
         data: {

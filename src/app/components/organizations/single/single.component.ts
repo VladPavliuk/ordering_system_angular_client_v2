@@ -76,6 +76,10 @@ export class SingleComponent implements OnInit {
     this.serverApiService.organizationApi.show(id)
       .then(res => {
         this.organization = res;
+        this.serverApiService.organizationApi.getSchedule(this.organization.id)
+          .then(res => {
+            console.log(res);
+          });
       });
   }
 
