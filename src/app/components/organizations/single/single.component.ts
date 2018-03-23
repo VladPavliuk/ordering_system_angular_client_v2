@@ -7,6 +7,7 @@ import {Location} from '@angular/common';
 import {ServerApiService} from '../../../services/server-api/server-api.service';
 import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 import {Globals} from '../../../globals';
+import {DaySchedule} from '../../../essences/DaySchedule';
 
 @Component({
   selector: 'app-single',
@@ -15,12 +16,13 @@ import {Globals} from '../../../globals';
 })
 export class SingleComponent implements OnInit {
 
+  public daysList: DaySchedule[] = [];
   public organization: Organization;
   public isOrganizationBelongToMe = false;
   public services: Service[];
   public displayedColumns = ['title', 'price', 'duration', 'actions'];
   public showUploadAvatarButton = false;
-  public selectedAvatar: { file: any,  title: string } = { file: '', title: ''};
+  public selectedAvatar: { file: any, title: string } = {file: '', title: ''};
   @ViewChild('avatar_input') avatarInput;
 
   constructor(
@@ -78,7 +80,7 @@ export class SingleComponent implements OnInit {
         this.organization = res;
         this.serverApiService.organizationApi.getSchedule(this.organization.id)
           .then(res => {
-            console.log(res);
+            this.daysList = res;
           });
       });
   }

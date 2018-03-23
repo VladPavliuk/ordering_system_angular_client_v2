@@ -29,6 +29,22 @@
                #avatar_input
                (change)="onAvatarSelect($event)"
                style="display: none;">
+        <h3>Schedule</h3>
+        <table class="table">
+            <tr>
+                <th>Weekday</th>
+                <th>Day schedule</th>
+            </tr>
+            <tr *ngFor="let day of daysList; let i=index">
+                <td>{{ day.date_ID.title }}</td>
+                <td>
+                    <span *ngIf="!day.isHoliday && !day.isDayAndNight">{{ day.from }} - {{ day.to }}</span>
+                    <span *ngIf="day.isHoliday"><em>Holiday</em></span>
+                    <span *ngIf="day.isDayAndNight"><em>All day and night</em></span>
+                </td>
+            </tr>
+        </table>
+
         <div *ngIf="services && services.length > 0">
             <hr>
             <h3>Pined services</h3>

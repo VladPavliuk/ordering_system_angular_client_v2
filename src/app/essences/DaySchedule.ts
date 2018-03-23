@@ -4,5 +4,7 @@ export class DaySchedule {
   from: string;
   to: string;
   isAllDayAndNight: boolean;
+  isDayAndNight?: boolean;
   isHoliday: boolean;
+  date_ID?: boolean;
 }
