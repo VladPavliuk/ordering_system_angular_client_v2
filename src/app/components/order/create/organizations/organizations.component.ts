@@ -9,14 +9,16 @@ import {Globals} from '../../../../globals';
   styleUrls: ['./organizations.component.css']
 })
 export class OrganizationsComponent implements OnInit {
-  public displayedColumns = ['avatar', 'title', 'actions'];
+  public displayedColumns = ['avatar', 'title', 'actions', 'mark'];
+  public Math;
   @Output() onOrganizationSelected = new EventEmitter<Organization>();
   @Input() public organizations: Organization[];
 
   constructor(
     private organizationsService: OrganizationsService,
-    public globals: Globals
+    public globals: Globals,
   ) {
+    this.Math = Math;
   }
 
   ngOnInit() {

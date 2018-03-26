@@ -5,4 +5,5 @@ export class Organization {
   title: string;
   imagePath?: string;
   schedule: DaySchedule[];
+  mark?: number;
 }

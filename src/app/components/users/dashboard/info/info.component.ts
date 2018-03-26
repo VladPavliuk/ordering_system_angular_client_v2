@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ServerApiService} from '../../../../services/server-api/server-api.service';
 import {User} from '../../../../essences/User';
 import {SnackBarService} from '../../../../services/snack-bar/snack-bar.service';
+import {Globals} from '../../../../globals';
 
 @Component({
   selector: 'app-user-info',
@@ -15,7 +16,8 @@ export class InfoComponent implements OnInit {
   @ViewChild('avatar_input') avatarInput;
   constructor(
     private serverApiService: ServerApiService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    public globals: Globals
   ) {
   }
 

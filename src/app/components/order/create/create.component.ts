@@ -8,7 +8,8 @@ import {Location} from '@angular/common';
 import * as moment from 'moment';
 import {ServerApiService} from '../../../services/server-api/server-api.service';
 import {Router} from '@angular/router';
-import { Globals } from '../../../globals';
+import {Globals} from '../../../globals';
+import {SnackBarService} from '../../../services/snack-bar/snack-bar.service';
 
 @Component({
   selector: 'app-create',
@@ -38,6 +39,7 @@ export class CreateComponent implements OnInit {
     private location: Location,
     private router: Router,
     private serverApiService: ServerApiService,
+    private snackBarService: SnackBarService
   ) {
   }
 
@@ -92,12 +94,36 @@ export class CreateComponent implements OnInit {
     this.customerPhone = event.target.value;
   }
 
+  onStepperSelectionChange(event) {
+    this.stepperIndex = event.selectedIndex;
+  }
+
+  getAverageMarkForOrganizations(): void {
+    for (let i = 0; i < this.organizations.length; i++) {
+      this.serverApiService.organizationApi.getAverageMark(this.organizations[i].id, this.selectedService.id)
+        .then(res => {
+          this.organizations[i].mark = res;
+        });
+    }
+  }
+
   onServiceSelect(service: Service) {
     this.selectedService = service;
     this.serverApiService.serviceApi.organizationsList(service.id)
       .then(res => {
-        this.stepperIndex = 1;
-        this.organizations = res;
+        if (res && res.length > 0) {
+          this.stepperIndex = 1;
+          this.organizations = res;
+          this.getAverageMarkForOrganizations();
+        } else {
+          this.snackBarService.show({
+            data: {
+              message: 'No organizations',
+            },
+            panelClass: 'error',
+            duration: 1000
+          });
+        }
       });
   }
 
