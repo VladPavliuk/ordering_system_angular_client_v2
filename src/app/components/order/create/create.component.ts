@@ -20,7 +20,7 @@ export class CreateComponent implements OnInit {
   public stepperIndex = 0;
   public selectedOrganization: Organization;
   public selectedService: Service;
-
+  public moment = moment;
   public services: Service[];
   public organizations: Organization[];
 
@@ -28,7 +28,8 @@ export class CreateComponent implements OnInit {
   private customerLastName: string;
   private customerPhone: string;
   private customerService: Service;
-  private startingDate: any;
+  public startingDate: any = '';
+  public endingDate: any = '';
 
   constructor(
     private organizationsService: OrganizationsService,
@@ -46,6 +47,7 @@ export class CreateComponent implements OnInit {
 
   setStartingDate(event): void {
     this.startingDate = event.value;
+    this.endingDate = moment(this.startingDate).add(this.selectedService.duration, 'm');
   }
 
   getOrganizations(): void {

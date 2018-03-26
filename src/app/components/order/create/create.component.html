@@ -46,38 +46,64 @@
                 <h2>Order details</h2>
                 <div class="customer-data-container">
                     <div *ngIf="selectedService && selectedOrganization">
-                        <mat-list role="list">
-                            <mat-list-item role="listitem">
-                                Selected service: <b>{{ selectedService.title }}</b>
-                            </mat-list-item>
-                            <mat-list-item role="listitem">
-                                Organization service: <b>{{ selectedOrganization.title }}</b>
-                            </mat-list-item>
-                            <mat-list-item role="listitem">
-                                Price: <b> $ {{ selectedService.price }}</b>
-                            </mat-list-item>
-                            <mat-list-item role="listitem">
-                                Duration: <b> {{ selectedService.duration }} min.</b>
-                            </mat-list-item>
-                            <mat-list-item role="listitem">
-                                <mat-form-field>
-                                    <input (dateTimeChange)="setStartingDate($event)"
-                                           [owlDateTime]="dt"
-                                           [owlDateTimeTrigger]="dt"
-                                           matInput
-                                           placeholder="Set time of start">
-                                </mat-form-field>
+                        <div class="row">
+                            <div class="col-6">
+                                <mat-list role="list">
+                                    <mat-list-item role="listitem">
+                                        Selected service:&nbsp;<b>{{ selectedService.title }}</b>
+                                    </mat-list-item>
+                                    <mat-list-item role="listitem">
+                                        Organization service:&nbsp;<b>{{ selectedOrganization.title }}</b>
+                                    </mat-list-item>
+                                    <mat-list-item role="listitem">
+                                        Price:&nbsp;<b>$&nbsp;{{ selectedService.price }}</b>
+                                    </mat-list-item>
+                                    <mat-list-item role="listitem">
+                                        Duration:&nbsp;<b>{{ selectedService.duration }}&nbsp;min.</b>
+                                    </mat-list-item>
+                                </mat-list>
+                            </div>
+                            <div class="col-6">
+                                <mat-list role="list">
+                                    <mat-list-item role="listitem">
+                                        <mat-form-field>
+                                            <input (dateTimeChange)="setStartingDate($event)"
+                                                   [owlDateTime]="dt"
+                                                   [owlDateTimeTrigger]="dt"
+                                                   matInput
+                                                   placeholder="Set time of start">
+                                        </mat-form-field>
 
-                                <owl-date-time #dt></owl-date-time>
-                            </mat-list-item>
-                        </mat-list>
+                                        <owl-date-time #dt></owl-date-time>
+                                    </mat-list-item>
+                                    <mat-list-item *ngIf="startingDate" role="listitem">
+                                        Start time:&nbsp;<b>{{ moment(startingDate).format("HH:mm DD-MMM-YYYY") }}</b>
+                                    </mat-list-item>
+                                    <mat-list-item *ngIf="startingDate" role="listitem">
+                                        End time:&nbsp;<b>{{ moment(endingDate).format("HH:mm DD-MMM-YYYY") }}</b>
+                                    </mat-list-item>
+                                    <mat-list-item *ngIf="startingDate" role="listitem">
+                                        <button (click)="makeOrder()"
+                                                color="accent"
+                                                mat-raised-button>Check availability</button>
+                                    </mat-list-item>
+                                    <mat-list-item role="listitem">
+                                        <button (click)="makeOrder()"
+                                                color="primary"
+                                                disabled
+                                                mat-raised-button>Make an order!</button>
+                                    </mat-list-item>
+                                </mat-list>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!--<mat-form-field>-->
                     <!--<input matInput (input)="onCustomerPhoneInput($event)" placeholder="Your phone number">-->
                     <!--</mat-form-field>-->
                 </div>
-                <button (click)="makeOrder()" color="primary" mat-raised-button>Make an order!</button>
+
             </mat-step>
         </mat-horizontal-stepper>
     </mat-card-content>
