@@ -83,13 +83,14 @@
                                         End time:&nbsp;<b>{{ moment(endingDate).format("HH:mm DD-MMM-YYYY") }}</b>
                                     </mat-list-item>
                                     <mat-list-item *ngIf="startingDate" role="listitem">
-                                        <button (click)="makeOrder()"
+                                        <button (click)="checkAvailability()"
                                                 color="accent"
                                                 mat-raised-button>Check availability</button>
                                     </mat-list-item>
                                     <mat-list-item role="listitem">
                                         <button (click)="makeOrder()"
                                                 color="primary"
+                                                [disabled]="!isAvailable"
                                                 mat-raised-button>Make an order!</button>
                                     </mat-list-item>
                                 </mat-list>

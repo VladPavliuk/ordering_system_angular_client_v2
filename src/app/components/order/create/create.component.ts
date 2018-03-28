@@ -24,6 +24,7 @@ export class CreateComponent implements OnInit {
   public moment = moment;
   public services: Service[];
   public organizations: Organization[];
+  public isAvailable = false;
 
   private customerFirstName: string;
   private customerLastName: string;
@@ -78,6 +79,16 @@ export class CreateComponent implements OnInit {
       StartedAt: moment(this.startingDate).format('YYYY-MM-DDTHH:mm:ss')
     }).then(res => {
       this.router.navigate(['/home']);
+    });
+  }
+
+  checkAvailability(): void {
+    this.serverApiService.organizationApi.isAvailable(
+      this.selectedOrganization.id,
+      moment(this.startingDate).format('YYYY-MM-DDTHH:mm:ss'),
+      moment(this.endingDate).format('YYYY-MM-DDTHH:mm:ss')
+    ).then(res => {
+      this.isAvailable = res;
     });
   }
 

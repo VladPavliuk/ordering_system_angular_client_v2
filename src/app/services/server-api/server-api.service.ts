@@ -236,6 +236,13 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
+  isAvailable(organizationId: number, dateTimeFrom: string, dateTimeTo: string): Promise<any> {
+    return this.serverService.request({
+      method: 'get',
+      url: 'api/organizations/' + organizationId + '/is-available/' + dateTimeFrom + '/' + dateTimeTo,
+    });
+  }
+
   store(instance: Organization): Promise<Organization> {
     return this.serverService.request({
       method: 'post',
