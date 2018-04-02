@@ -18,9 +18,11 @@ export class SingleComponent implements OnInit {
 
   public daysList: DaySchedule[] = [];
   public organization: Organization;
+  public orders: any[];
   public isOrganizationBelongToMe = false;
   public services: Service[];
   public displayedColumns = ['title', 'price', 'duration', 'actions'];
+  public displayedOrdersColumns = ['service', 'duration', 'price'];
   public showUploadAvatarButton = false;
   public selectedAvatar: { file: any, title: string } = {file: '', title: ''};
   @ViewChild('avatar_input') avatarInput;
@@ -40,6 +42,7 @@ export class SingleComponent implements OnInit {
     this.getOrganization(id);
     this.checkIsOrganizationBelongToMe(id);
     this.getServicesList(id);
+    this.getOrganizationsOrders(id);
   }
 
   onAvatarMouseOver() {
@@ -74,13 +77,20 @@ export class SingleComponent implements OnInit {
       });
   }
 
+  getOrganizationsOrders(id: number) {
+    this.serverApiService.organizationApi.getOrders(id)
+      .then(res => {
+        this.orders = res;
+      });
+  }
+
   getOrganization(id: number) {
     this.serverApiService.organizationApi.show(id)
       .then(res => {
         this.organization = res;
         this.serverApiService.organizationApi.getSchedule(this.organization.id)
-          .then(res => {
-            this.daysList = res;
+          .then(res1 => {
+            this.daysList = res1;
           });
       });
   }

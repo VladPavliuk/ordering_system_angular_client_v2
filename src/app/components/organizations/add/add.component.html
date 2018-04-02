@@ -6,7 +6,7 @@
                 <input matInput (input)="onTitleInput($event)" placeholder="Organization title">
             </mat-form-field>
         </div>
-        Schedule
+        <div style="margin-top: 30px;">Schedule</div>
         <table class="table">
             <tr>
                 <th>Weekday</th>
@@ -36,8 +36,8 @@
                 </td>
             </tr>
         </table>
+        <div>
+            <button (click)="create()" color="primary" mat-raised-button>Add organization</button>
+        </div>
     </mat-card-content>
-    <mat-card-actions>
-        <button (click)="create()" color="primary" mat-raised-button>Add organization</button>
-    </mat-card-actions>
 </mat-card>

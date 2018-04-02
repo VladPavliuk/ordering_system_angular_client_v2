@@ -229,6 +229,14 @@ class OrganizationApi implements StandardActions<Organization> {
     });
   }
 
+  getOrders(id: number): Promise<any> {
+    return this.serverService.request({
+      method: 'get',
+      auth: true,
+      url: 'api/organizations/' + id + '/orders'
+    });
+  }
+
   getAverageMark(organizationId: number, serviceId: number): Promise<any> {
     return this.serverService.request({
       method: 'get',
