@@ -88,6 +88,14 @@ export class CreateComponent implements OnInit {
       moment(this.startingDate).format('YYYY-MM-DDTHH:mm:ss'),
       moment(this.endingDate).format('YYYY-MM-DDTHH:mm:ss')
     ).then(res => {
+      this.snackBarService.show({
+        data: {
+          message: res ? 'Is available' : 'Is not available',
+        },
+        panelClass: res ? 'success' : 'error',
+        duration: 1000
+      }); 
+
       this.isAvailable = res;
     });
   }

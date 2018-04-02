@@ -1,5 +1,6 @@
-<div>
+<div class="wrapper">
     <h4>{{ usersOrders && usersOrders.length > 0 ? 'Your orders' : 'No orders' }}</h4>
+    <hr style="margin: 0;">
     <mat-table *ngIf="usersOrders && usersOrders.length > 0" #table [dataSource]="usersOrders">
 
         <ng-container matColumnDef="organization">

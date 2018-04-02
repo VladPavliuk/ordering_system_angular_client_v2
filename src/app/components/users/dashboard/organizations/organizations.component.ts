@@ -11,7 +11,7 @@ import {Globals} from '../../../../globals';
 export class OrganizationsComponent implements OnInit {
 
   public usersOrganizations: Organization[];
-  displayedColumns = ['avatar', 'title', 'actions'];
+  displayedColumns = ['avatar', 'title', 'mark', 'void', 'actions'];
 
   constructor(
     private serverApiService: ServerApiService,

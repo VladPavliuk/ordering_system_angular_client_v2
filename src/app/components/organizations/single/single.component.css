@@ -16,12 +16,21 @@
     cursor: pointer;
     position: absolute;
     bottom: 0;
-    text-shadow: 2px 2px #c5c5c5;
+    left: 0;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     width: 100%;
-    color: #2b2b2b;
+    color: #c7c7c7;
     font-weight: bold;
     background-color: rgba(1, 1, 1, 0.2);
     text-transform: uppercase;
     font-size: 14pt;
     border: none;
+}
+
+.set-first-organization-avatar {
+    margin-bottom: 30px;
+}
+
+.pined-services {
+    margin-top: 30px;
 }

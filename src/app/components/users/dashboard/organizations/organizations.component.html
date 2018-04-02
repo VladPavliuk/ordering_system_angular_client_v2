@@ -1,8 +1,9 @@
-<div>
+<div class="wrapper">
   <h4>{{ usersOrganizations && usersOrganizations.length > 0 ? 'Your organizations' : 'No organizations' }}</h4>
+  <hr style="margin: 0;">
   <mat-table *ngIf="usersOrganizations && usersOrganizations.length > 0" #table [dataSource]="usersOrganizations">
     <ng-container matColumnDef="avatar">
-    <mat-header-cell *matHeaderCellDef> Avatar </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef style="padding-left: 10px;"> Avatar </mat-header-cell>
     <mat-cell *matCellDef="let organization">
       <img *ngIf="organization.imagePath"
            [src]="'http://localhost:5000/' + organization.imagePath"
@@ -17,6 +18,16 @@
       <mat-cell *matCellDef="let organization"> {{organization.title}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="mark">
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-cell *matCellDef="let organization"> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="void">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let organization"> </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let organization">
@@ -27,6 +38,9 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <br>
-  <button mat-raised-button color="primary" class="create-organization-button" routerLink="/organization-add">Create organization</button>
+
+  <div class="create-button-wrapper">
+    <button mat-raised-button color="primary" routerLink="/organization-add">Create organization</button>
+  </div>
+
 </div>

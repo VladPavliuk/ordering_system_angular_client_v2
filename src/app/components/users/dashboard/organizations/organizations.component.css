@@ -2,3 +2,11 @@
     height: 80px;
     padding: 5px;
 }
+
+.wrapper {
+    margin-top: 60px;
+}
+
+.create-button-wrapper {
+    margin-top: 10px;
+}

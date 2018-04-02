@@ -12,7 +12,7 @@
     padding: 10px;
     border-radius: 15px;
     transition: all .3s;
-    border: 2px solid #202020;
+    border: 2px solid #5a5a5a;
 }
 
 .item-icon img {
@@ -20,7 +20,7 @@
 }
 
 .item:hover {
-    background-color: #555755;
+    background-color: #cfd3cf;
     cursor: pointer;
 }
 
