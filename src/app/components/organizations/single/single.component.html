@@ -81,20 +81,21 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
-
-            <div style="margin-top: 30px;" *ngIf="isOrganizationBelongToMe">
-                <button mat-raised-button color="accent"
-                        routerLink="/organization/{{organization.id}}/available-services">
-                    Pin service
-                </button>
-
-                <button mat-raised-button color="warn"
-                        (click)="delete()">
-                    Delete organization
-                </button>
-            </div>
         </div>
-        <div class="pined-services" *ngIf="services && services.length > 0">
+
+        <div style="margin-top: 30px;" *ngIf="isOrganizationBelongToMe">
+            <button mat-raised-button color="accent"
+                    routerLink="/organization/{{organization.id}}/available-services">
+                Pin service
+            </button>
+
+            <button mat-raised-button color="warn"
+                    (click)="delete()">
+                Delete organization
+            </button>
+        </div>
+
+        <div class="pined-services" *ngIf="orders && orders.length > 0">
 
             <h3>Organization orders</h3>
             <hr style="margin: 0;">

@@ -6,7 +6,7 @@
     <mat-header-cell *matHeaderCellDef style="padding-left: 10px;"> Avatar </mat-header-cell>
     <mat-cell *matCellDef="let organization">
       <img *ngIf="organization.imagePath"
-           [src]="'http://localhost:5000/' + organization.imagePath"
+           [src]="globals.domain  + organization.imagePath"
            class="organization-avatar"
            alt="Avatar">
       <mat-icon *ngIf="!organization.imagePath">businesses</mat-icon>
