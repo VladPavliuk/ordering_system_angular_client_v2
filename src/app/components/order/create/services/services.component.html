@@ -1,12 +1,15 @@
 <div *ngIf="services && services.length > 0">
   <div class="service-form-container">
     <div (click)="onServiceSelect(service)"
-         class="item-wrapper"
+         style="display: inline-block"
+         class="col-lg-4 col-md-12 item-wrapper"
          *ngFor="let service of services">
         <div class="item">
             <div class="item-icon">
                 <!--<mat-icon>dashboard</mat-icon>-->
                 <img [src]="globals.domain + service.imagePath"
+                     style="height: 172px;
+padding: 10px;"
                      [alt]="service.title">
             </div>
             <div class="item-label">

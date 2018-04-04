@@ -94,7 +94,7 @@ export class CreateComponent implements OnInit {
         },
         panelClass: res ? 'success' : 'error',
         duration: 1000
-      }); 
+      });
 
       this.isAvailable = res;
     });
@@ -119,7 +119,7 @@ export class CreateComponent implements OnInit {
 
   getAverageMarkForOrganizations(): void {
     for (let i = 0; i < this.organizations.length; i++) {
-      this.serverApiService.organizationApi.getAverageMark(this.organizations[i].id, this.selectedService.id)
+      this.serverApiService.organizationApi.getAverageMark(this.organizations[i].organization_ID.id, this.selectedService.id)
         .then(res => {
           this.organizations[i].mark = res;
         });
