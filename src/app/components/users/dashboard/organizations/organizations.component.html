@@ -1,11 +1,11 @@
 <div class="wrapper">
   <h4>{{ usersOrganizations && usersOrganizations.length > 0 ? 'Your organizations' : 'No organizations' }}</h4>
   <hr style="margin: 0;">
-  <mat-table *ngIf="usersOrganizations && usersOrganizations.length > 0" #table [dataSource]="usersOrganizations">
+  <mat-table *ngIf="usersOrganizations && globals.domain && usersOrganizations.length > 0" #table [dataSource]="usersOrganizations">
     <ng-container matColumnDef="avatar">
     <mat-header-cell *matHeaderCellDef style="padding-left: 10px;"> Avatar </mat-header-cell>
     <mat-cell *matCellDef="let organization">
-      <img *ngIf="organization.imagePath"
+      <img *ngIf="organization.imagePath && globals"
            [src]="globals.domain  + organization.imagePath"
            class="organization-avatar"
            alt="Avatar">
