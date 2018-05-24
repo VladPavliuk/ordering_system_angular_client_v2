@@ -1,3 +1,17 @@
-<p>
-  add works!
-</p>
+<mat-card>
+    <mat-card-title>Admin creation form</mat-card-title>
+    <mat-card-content>
+        <div class="admin-creation-container">
+            <mat-form-field>
+                <input matInput (input)="onNameInput($event)" placeholder="Admin name">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput (input)="onPasswordInput($event)" placeholder="Admin password">
+            </mat-form-field>
+        </div>
+        
+        <div>
+            <button (click)="create()" color="primary" mat-raised-button>Add admin</button>
+        </div>
+    </mat-card-content>
+</mat-card>

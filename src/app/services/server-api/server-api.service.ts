@@ -102,6 +102,16 @@ class UserApi implements StandardActions<User> {
   ) {
   }
 
+  addAdmin(adminData): Promise<any> {
+    console.log(adminData);
+    return this.serverService.request({
+      method: 'post',
+      body: adminData,
+      auth: true,
+      url: 'api/admins'
+    });
+  }
+
   login(userName: string, password: string): Promise<any> {
     return this.serverService.request({
       method: 'post',

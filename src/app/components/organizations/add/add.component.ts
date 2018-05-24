@@ -114,4 +114,5 @@ export class AddComponent implements OnInit {
       this.location.back();
     });
   }
+  
 }
