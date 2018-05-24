@@ -12,6 +12,12 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+        <div *ngIf="isAdmin">
+            <button routerLink="/admin-add" mat-menu-item>
+                <mat-icon>add</mat-icon>
+                <span>Add admin</span>
+            </button> 
+        </div>
         <div *ngIf="isAuthorized">
             <button routerLink="/home" mat-menu-item>
                 <mat-icon>dashboard</mat-icon>

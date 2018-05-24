@@ -74,6 +74,7 @@ import {RegisterComponent} from './components/users/register/register.component'
 import {OrganizationsComponent as UserOwnerOrganizationsComponent} from './components/users/dashboard/organizations/organizations.component';
 import {LoginComponent} from './components/admins/login/login.component';
 import {HomeComponent} from './components/admins/home/home.component';
+import {AddComponent as AddAdminComponent} from './components/admins/add/add.component';
 import {DashboardComponent} from './components/users/dashboard/dashboard.component';
 import {OrganizationsComponent} from './components/users/dashboard/organizations/organizations.component';
 import {InfoComponent as UserInfoComponent} from './components/users/dashboard/info/info.component';
@@ -119,7 +120,8 @@ import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-t
     UserSignupComponent,
     DayScheduleComponent,
     OrderSingleComponent,
-    MarkupDialogComponent
+    MarkupDialogComponent,
+    AddAdminComponent
   ],
   entryComponents: [
     SnackBarComponent

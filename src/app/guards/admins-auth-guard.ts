@@ -12,8 +12,8 @@ export class AdminsAuthGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.cookieService.check('admin_token')) {
-            return this.cookieService.check('admin_token');
+        if (this.cookieService.check('is_admin') && this.cookieService.get('is_admin')) {
+            return true;
         } else {
             this.router.navigate(['/admin/login']);
         }

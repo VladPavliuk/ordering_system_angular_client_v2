@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit, DoCheck {
 
   public isAuthorized = false;
+  public isAdmin = false;
   constructor(
     private location: Location,
     private authService: AuthService,
@@ -24,10 +25,12 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.isAuthorized = this.authService.isAuthorized();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   ngOnInit() {
     this.isAuthorized = this.authService.isAuthorized();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   toPrevPage(): void {
