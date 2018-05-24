@@ -58,7 +58,7 @@ const routes: Routes = [
   {path: 'service-add', component: ServiceAddComponent, canActivate: [UsersAuthGuard]},
   {path: 'service/:id', component: ServiceSingleComponent, canActivate: [UsersAuthGuard]},
 
-  {path: 'order', component: CreateOrderComponent},
+  {path: 'order', component: CreateOrderComponent, canActivate: [UsersAuthGuard]},
   {path: 'orders', component: OrdersIndexComponent, canActivate: [UsersAuthGuard]},
   {path: 'order/:id', component: OrderSingleComponent, canActivate: [UsersAuthGuard]},
 
