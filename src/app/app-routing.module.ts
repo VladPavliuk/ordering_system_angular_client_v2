@@ -31,6 +31,7 @@ import {SignupComponent as UserSignupComponent} from './components/users/signup/
 //>Admins
 import {LoginComponent as AdminLoginComponent} from './components/admins/login/login.component';
 import {HomeComponent as AdminHomeComponent} from './components/admins/home/home.component';
+import {AddComponent as AddAdminComponent} from './components/admins/add/add.component';
 //<
 
 //> Guards
@@ -40,6 +41,8 @@ import {AdminsAuthGuard} from './guards/admins-auth-guard';
 import {AdminsGuestGuard} from './guards/admins-guest-guard';
 import {IsOrganizationBelongToUserGuard} from './guards/is-organization-belong-to-user-guard';
 //<
+
+//test pull quest
 
 const routes: Routes = [
 
@@ -69,6 +72,7 @@ const routes: Routes = [
 
   {path: 'admin/login', component: AdminLoginComponent, canActivate: [AdminsGuestGuard]},
   {path: 'admin/home', component: AdminHomeComponent, canActivate: [UsersAuthGuard]},
+  {path: 'admin-add', component: AddAdminComponent, canActivate: [AdminsAuthGuard]},
 
 ];
 
